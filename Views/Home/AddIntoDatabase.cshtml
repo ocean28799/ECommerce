@@ -1,0 +1,159 @@
+﻿
+@{
+    ViewBag.Title = "AddIntoDatabase";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="ht__bradcaump__area bg-image--1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="bradcaump__inner text-center">
+                    <nav class="bradcaump-content">
+                        <a class="breadcrumb_item" href="@Url.Action("Index","Home")" style="color:#eeaf85">Home</a>
+                        <span class="brd-separetor">/</span>
+                        <span class="breadcrumb_item active">Check Out</span>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Start Checkout Area -->
+<section class="wn__checkout__area section-padding--lg bg__white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="wn_checkout_wrap">
+                    <div class="checkout_info">
+                        <span>Have a voucher? </span>
+                        <a class="showcoupon" href="#">Click here to enter your voucher</a>
+                    </div>
+                    <div class="checkout_coupon">
+                        <form action="@Url.Action("ApplyVoucher","Home")" method="post">
+                            <div class="form__coupon">
+                                <input type="text" id="maVoucher" name="maVoucher" placeholder="Coupon code">
+                                <button type="submit">Apply voucher</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-12">
+                <div class="customer_details">
+                    <h3 style="font-family:Georgia, 'Times New Roman', Times, serif">Thông Tin Hoá Đơn</h3>
+                    @if (Session["kh"] != null)
+                    {
+                        <form class="customar__field" action="@Url.Action("Checkout","Home")" method="post"  style="font-weight:600">
+                            <div class="input_box">
+                                <label>Họ Tên Khách Hàng <span>*</span></label>
+                                <input type="text" id="shipName" name="shipName" required value="@Session["UserName"].ToString()">
+                            </div>
+                            <div class="input_box">
+                                <label>Địa Chỉ Nhận Hàng <span>*</span></label>
+                                <input type="text" id="address" name="address" placeholder="Địa chỉ" required value="@Session["UserAddress"].ToString()">
+                            </div>
+                            <div class="input_box">
+                                <label>Số Điện Thoại <span>*</span></label>
+                                <input type="text" id="mobile" name="mobile" required value="@Session["PhoneNumber"].ToString()">
+                            </div>
+                            <div class="input_box">
+                                <label>Email <span>*</span></label>
+                                <input type="email" id="email" name="email" required placeholder="Vui lòng nhập email..." value="@Session["Email"].ToString()">
+                            </div>
+                            <div class="form-submit">
+                                <input type="submit" value="Xác Nhận" class="btn" style="background-color:black;color:white;border-radius:16px;font-size:1.4em;margin-left:80%;margin-top:5%" />
+                            </div>
+                        </form>
+                    }
+                    else
+                    {
+                        <form class="customar__field" action="@Url.Action("Checkout","Home")" method="post"  style="font-weight:600">
+                            <div class="input_box">
+                                <label>Họ Tên Khách Hàng <span>*</span></label>
+                                <input type="text" id="shipName" name="shipName" required placeholder="Vui lòng nhập tên người nhận..." value="">
+                            </div>
+                            <div class="input_box">
+                                <label>Địa Chỉ Nhận Hàng <span>*</span></label>
+                                <input type="text" id="address" name="address" required placeholder="Vui lòng nhập địa chỉ" value="">
+                            </div>
+                            <div class="input_box">
+                                <label>Số Điện Thoại <span>*</span></label>
+                                <input type="text" id="mobile" name="mobile" required value="" placeholder="Vui lòng nhập số điện thoại...">
+                            </div>
+                            <div class="input_box">
+                                <label>Email <span>*</span></label>
+                                <input type="email" id="email" name="email" required placeholder="Vui lòng nhập email...">
+                            </div>
+                            <div class="form-submit">
+                                <input type="submit" value="Xác Nhận" class="btn" style="background-color:black;color:white;border-radius:16px;font-size:1.4em;margin-left:80%;margin-top:5%" />
+                            </div>
+                        </form>
+                    }
+
+
+                </div>
+               
+            </div>
+            <div class="col-lg-6 col-12 md-mt-40 sm-mt-40">
+                <div class="wn__order__box">
+                    <h3 class="onder__title">Your order</h3>
+                    <h6 style="margin-left:57%;color:darkred;text-decoration:underline">Date: @Session["OrderTime"].ToString()</h6>
+                    <ul class="order__total">
+                        <li>Product</li>
+                        <li>Total</li>
+                    </ul>
+                    <ul class="order_product">
+                        @foreach (var item in (dynamic)ViewData["data1"])
+                        {
+                            <li>@item.TenSanPham × @item.SoLuong<span>@item.ThanhTien.ToString("#,##0").Replace(',', '.') đ</span></li>
+                        }
+                        </ul>
+                    <ul class="shipping__method">
+                        <li>Cart Subtotal <span>@ViewBag.totalMoney.ToString("#,##0").Replace(',', '.') đ</span></li>
+                        @if (Session["voucher"] != null)
+                        {
+                            <li>Shipping Fee <span style="text-decoration:line-through;margin-left:51%">23.000 đ </span>Free</li>
+                        }
+                        else
+                        {
+                            <li>Shipping Fee <span>23.000 đ </span></li>
+                        }
+
+                        <li>
+                            Payment
+                            <ul>
+
+                                <li>
+                                    <input name="shipping_method[0]" data-index="0" value="legacy_flat_rate" checked="checked" type="radio">
+                                    <label>Cash on delivery</label>
+                                </li>
+
+                                <li style="margin-left:53%">
+                                    <a href="@Url.Action("PaymentWithPaypal","Payment")"><img src="https://image.flaticon.com/icons/png/128/888/888871.png" style="width:20%;padding-right:1%" /><img src="https://image.flaticon.com/icons/png/128/196/196565.png" style="width:60%" /></a>
+                                   
+                                </li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="total__amount">
+                        @if (Session["voucher"] != null)
+                        {
+                            <li>Order Total <span>@ViewBag.totalMoney.ToString("#,##0").Replace(',', '.') đ</span></li>
+                        }
+                        else
+                        {
+                            <li>Order Total <span>@ViewBag.moneyTotal.ToString("#,##0").Replace(',', '.') đ</span></li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Checkout Area -->

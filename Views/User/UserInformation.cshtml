@@ -1,0 +1,334 @@
+﻿@model ECommerce.Models.KhachHang
+@{
+    ViewBag.Title = "TechPi | User Information";
+    Layout = "~/Views/Shared/_LayoutUserInfo.cshtml";
+}
+
+
+<div class="color-switcher animated">
+    <h5>Accent Color</h5>
+    <ul class="accent-colors">
+        <li class="accent-primary active" data-color="primary">
+            <i class="material-icons">check</i>
+        </li>
+        <li class="accent-secondary" data-color="secondary">
+            <i class="material-icons">check</i>
+        </li>
+        <li class="accent-success" data-color="success">
+            <i class="material-icons">check</i>
+        </li>
+        <li class="accent-info" data-color="info">
+            <i class="material-icons">check</i>
+        </li>
+        <li class="accent-warning" data-color="warning">
+            <i class="material-icons">check</i>
+        </li>
+        <li class="accent-danger" data-color="danger">
+            <i class="material-icons">check</i>
+        </li>
+    </ul>
+    <div class="actions mb-4">
+        <a class="mb-2 btn btn-sm btn-primary w-100 d-table mx-auto extra-action" href="https://www.facebook.com/profile.php?id=100007159365611">
+            <i class="material-icons">cloud</i> Contact with me ?
+        </a>
+    </div>
+
+    <div class="close">
+        <i class="material-icons">close</i>
+    </div>
+</div>
+<div class="color-switcher-toggle animated pulse infinite">
+    <i class="material-icons">settings</i>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Main Sidebar -->
+        <aside class="main-sidebar col-12 col-md-3 col-lg-2 px-0">
+            <div class="main-navbar">
+                <nav class="navbar align-items-stretch navbar-light bg-white flex-md-nowrap border-bottom p-0" style="background:#f1f7ff">
+                    <a class="navbar-brand w-100 mr-0" href="@Url.Action("Index","Home")" style="line-height: 25px">
+                        <div class="d-table m-auto">
+                            <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 25px;" src="https://image.flaticon.com/icons/png/128/187/187879.png" alt="Administrator">
+                            <span class="d-none d-md-inline ml-1">TechPi</span>
+                        </div>
+                    </a>
+                    <a class="toggle-sidebar d-sm-inline d-md-none d-lg-none">
+                        <i class="material-icons">&#xE5C4;</i>
+                    </a>
+                </nav>
+            </div>
+
+            <div class="nav-wrapper">
+                @if (Session["tmp1"].ToString() == "1")
+                {
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="@Url.Action("UserInformation","User",new { id=Session["UserID"].ToString()})">
+                                <i class="material-icons">person</i>
+                                <span>My Information</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="@Url.Action("ChoXacNhan","Home")">
+                                <i class="material-icons">vertical_split</i>
+                                <span>My Order</span>
+                            </a>
+                        </li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("UserInformation","User",new { id=Session["UserID"].ToString()})">
+                                <i class="material-icons">person</i>
+                                <span>My Information</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="@Url.Action("ChoXacNhan","Home")">
+                                <i class="material-icons">vertical_split</i>
+                                <span>My Order</span>
+                            </a>
+                        </li>
+                    </ul>
+                }
+
+            </div>
+        </aside>
+        <!-- End Main Sidebar -->
+        <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+            <div class="main-navbar sticky-top bg-white">
+                <!-- Main Navbar -->
+                <nav class="navbar align-items-stretch navbar-light flex-md-nowrap p-0" style="background:#f1f7ff">
+
+                    <ul class="navbar-nav border-left flex-row " style="padding-left:78%">
+                        <li class="nav-item border-right dropdown notifications">
+                            <a class="nav-link nav-link-icon text-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="nav-link-icon__wrapper">
+                                    <i class="material-icons">&#xE7F4;</i>
+                                    <span class="badge badge-pill badge-danger">2</span>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-small" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="#">
+                                    <div class="notification__icon-wrapper">
+                                        <div class="notification__icon">
+                                            <i class="material-icons">&#xE6E1;</i>
+                                        </div>
+                                    </div>
+                                    <div class="notification__content">
+                                        <span class="notification__category">Analytics</span>
+                                        <p>
+                                            Your website’s active users count increased by
+                                            <span class="text-success text-semibold">28%</span> in the last week. Great job!
+                                        </p>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <div class="notification__icon-wrapper">
+                                        <div class="notification__icon">
+                                            <i class="material-icons">&#xE8D1;</i>
+                                        </div>
+                                    </div>
+                                    <div class="notification__content">
+                                        <span class="notification__category">Sales</span>
+                                        <p>
+                                            Last week your store’s sales count decreased by
+                                            <span class="text-danger text-semibold">5.52%</span>. It could have been worse!
+                                        </p>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item notification__all text-center" href="#"> View all Notifications </a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                <img class="user-avatar rounded-circle mr-2" src="~/Admin/images/avatars/user.png" alt="User Avatar">
+                                <span class="d-none d-md-inline-block" style="font-weight:600;font-family:'Times New Roman', Times, serif">@Session["UserName"].ToString()</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-small">
+                                <a class="dropdown-item" href="@Url.Action("UserInformation","User",new { id=Session["UserID"].ToString()})">
+                                    <i class="material-icons">&#xE7FD;</i> Profile
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item text-danger" href="@Url.Action("LogOut","Authentication")">
+                                    <i class="material-icons text-danger">&#xE879;</i> Logout
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                    <nav class="nav">
+                        <a href="#" class="nav-link nav-link-icon toggle-sidebar d-md-inline d-lg-none text-center border-left" data-toggle="collapse" data-target=".header-navbar" aria-expanded="false" aria-controls="header-navbar">
+                            <i class="material-icons">&#xE5D2;</i>
+                        </a>
+                    </nav>
+                </nav>
+            </div>
+            <!-- / .main-navbar -->
+
+            <div class="main-content-container container-fluid px-4">
+                <!-- Page Header -->
+                <div class="page-header row no-gutters py-4">
+                    <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                        <span class="text-uppercase page-subtitle">Tổng quát</span>
+                        <h3 class="page-title">Hồ Sơ Cá Nhân</h3>
+                    </div>
+                </div>
+                <!-- End Page Header -->
+                <!-- Default Light Table -->
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card card-small mb-4 pt-3" style="height:96.5%">
+                            <div class="card-header border-bottom text-center">
+                                <div class="mb-3 mx-auto">
+                                    <img class="rounded-circle" src="~/Admin/images/avatars/user.png" alt="User Avatar" width="110">
+                                </div>
+                                <h4 class="mb-0">@Session["UserName"].ToString()</h4>
+                                <span class="text-muted d-block mb-2">@Html.DisplayFor(model => model.LoaiKhachHang.TenLoaiKH)</span>
+                                <a class="mb-2 btn btn-outline-danger mr-2" href="@Url.Action("LogOut","Authentication")">
+                                    <i class="material-icons text-danger"></i><span style="padding-left:5%;font-weight:500">Đăng Xuất</span>
+                                </a>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item p-4">
+                                    <strong class="text-muted d-block mb-2" style="font-size:20px;padding-bottom:2%">Thông Tin Chi Tiết</strong>
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <h6>@Html.DisplayNameFor(model => model.TenKH)</h6>
+                                        </div>
+                                        <div class="col-md-5">
+                                            @Html.DisplayFor(model => model.TenKH)
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <h6>@Html.DisplayNameFor(model => model.NgaySinh)</h6>
+                                        </div>
+                                        <div class="col-md-5">
+                                            @Html.DisplayFor(model => model.NgaySinh)
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <h6>Tên Tài Khoản</h6>
+                                        </div>
+                                        <div class="col-md-5">
+                                            @Html.DisplayFor(model => model.UserName)
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <h6>Mật Khẩu</h6>
+                                        </div>
+                                        <div class="col-md-5">
+                                            @Html.DisplayFor(model => model.Password)
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <h6>@Html.DisplayNameFor(model => model.SDT)</h6>
+                                        </div>
+                                        <div class="col-md-5">
+                                            @Html.DisplayFor(model => model.SDT)
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <h6>@Html.DisplayNameFor(model => model.DiaChi)</h6>
+                                        </div>
+                                        <div class="col-md-5">
+                                            @Html.DisplayFor(model => model.DiaChi)
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <h6 style="color:#008204">@Html.DisplayNameFor(model => model.DiemTichLuy)</h6>
+                                        </div>
+                                        <div class="col-md-5" style="color:#008204;font-weight:500">
+                                            @Html.DisplayFor(model => model.DiemTichLuy)
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="card card-small mb-4">
+                            <div class="card-header border-bottom">
+                                <h6 class="m-0">Thông Tin Tài Khoản</h6>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item p-3">
+                                    <div class="row">
+                                        <div class="col">
+                                            <form>
+                                                <div class="form-group">
+                                                    <label for="feFirstName">@Html.DisplayNameFor(model => model.TenKH)</label>
+                                                    <input type="text" class="form-control" id="feFirstName" placeholder="Họ và tên" value="@Html.DisplayFor(model => model.TenKH)" disabled>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="feDOB">@Html.DisplayNameFor(model => model.NgaySinh)</label>
+                                                    <input type="text" class="form-control" id="feDOB" placeholder="DOB" value="@Html.DisplayFor(model => model.NgaySinh)" disabled>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="feEmailAddress">Tên Tài Khoản</label>
+                                                    <input type="email" class="form-control" id="feEmailAddress" placeholder="Tên tài khoản" value="@Html.DisplayFor(model => model.UserName)" disabled>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="fePassword">Mật Khẩu</label>
+                                                    <input type="password" class="form-control" id="fePassword" placeholder="Mật khẩu" value="@Html.DisplayFor(model => model.Password)" disabled>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="feInputAddress">@Html.DisplayNameFor(model => model.DiaChi)</label>
+                                                    <input type="text" class="form-control" id="feInputAddress" placeholder="Địa chỉ" value="@Html.DisplayFor(model => model.DiaChi)" disabled>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="feInputAddress">@Html.DisplayNameFor(model => model.SDT)</label>
+                                                    <input type="text" class="form-control" id="feInputAddress" placeholder="Số điện thoại" value="@Html.DisplayFor(model => model.SDT)" disabled>
+                                                </div>
+
+                                            </form>
+                                            <a class="mb-2 btn btn-outline-info mr-2" href="@Url.Action("EditUserInformation","User",new { id=Session["UserID"].ToString()})" style="margin:2.5%;margin-left:73%;font-weight:500">Chỉnh sửa thông tin cá nhân</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="main-footer d-flex p-2 px-3 bg-white border-top">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
+                </ul>
+                <span class="copyright ml-auto my-auto mr-2">
+                    Ecommerce © 2020
+                    <a href="https://gmail.com" rel="nofollow">ocean28799@gmail.com</a>
+                </span>
+            </footer>
+        </main>
+    </div>
+</div>
+
+
+
+
+
+
+

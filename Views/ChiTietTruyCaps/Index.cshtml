@@ -1,0 +1,103 @@
+﻿@model IEnumerable<ECommerce.Models.ChiTietTruyCap>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="main-content-container container-fluid px-4">
+    <!-- Page Header -->
+    <div class="page-header row no-gutters py-4">
+        <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+            <span class="text-uppercase page-subtitle">Overview</span>
+            <h3 class="page-title">Product Access Details</h3>
+        </div>
+    </div>
+    <!-- End Page Header -->
+    <!-- Default Light Table -->
+    <div class="row">
+        <div class="col">
+            <div class="card card-small mb-4">
+                <div class="card-body p-0 pb-3 text-center">
+                    <table class="table mb-0">
+                        <thead class="bg-light">
+                            <tr>
+                                <th scope="col" class="border-0">Ngày Truy Cập</th>
+                                <th scope="col" class="border-0">Mã Sản Phẩm</th>
+                                <th scope="col" class="border-0"> @Html.DisplayNameFor(model => model.SanPham.TenSanPham)</th>
+                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.KhachHang.TenKH)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NgayTruyCap)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SanPham.MaSanPham)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SanPham.TenSanPham)
+                                </td>
+                                <td>
+                                    @if (item.MaKH == null)
+                                    {
+                                        <p style="margin-bottom:0.75rem">Unknown User</p>
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(modelItem => item.KhachHang.TenKH)
+                                    }
+
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Default Light Table -->
+</div>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.KhachHang.TenKH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SanPham.TenSanPham)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayTruyCap)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.KhachHang.TenKH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SanPham.TenSanPham)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayTruyCap)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.MaChiTietTruyCap }) |
+                @Html.ActionLink("Details", "Details", new { id = item.MaChiTietTruyCap }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.MaChiTietTruyCap })
+            </td>
+        </tr>
+    }
+
+</table>*@

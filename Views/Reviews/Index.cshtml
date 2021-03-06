@@ -1,0 +1,68 @@
+﻿@model IEnumerable<ECommerce.Models.Review>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="main-content-container container-fluid px-4">
+    <!-- Page Header -->
+    <div class="page-header row no-gutters py-4">
+        <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+            <span class="text-uppercase page-subtitle">Overview</span>
+            <h3 class="page-title">User Role</h3>
+        </div>
+    </div>
+    <!-- End Page Header -->
+    <!-- Default Light Table -->
+    <div class="row">
+        <div class="col">
+            <div class="card card-small mb-4">
+                <div class="card-header border-bottom">
+                    <a href="@Url.Action("Create", "Reviews")" class="mb-2 btn btn-outline-primary mr-2" style="font-size:16px;font-weight:500"><i class="material-icons">add</i>  Create New</a>
+                </div>
+                <div class="card-body p-0 pb-3 text-center">
+                    <table class="table mb-0">
+                        <thead class="bg-light">
+                            <tr>
+                                <th scope="col" class="border-0">ID</th>
+                                <th scope="col" class="border-0">Ngày Đăng</th>
+                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.KhachHang.TenKH)</th>
+                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.SanPham.TenSanPham)</th>
+                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.NoiDung)</th>
+                                <th scope="col" class="border-0"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ReviewID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NgayDang)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.KhachHang.TenKH)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SanPham.TenSanPham)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NoiDung)
+                                </td>
+
+                                <td>
+                                    <a href="@Url.Action("Delete", new { id = item.ReviewID })" class="mb-2 btn btn-sm btn-danger mr-1"><i class="material-icons">delete</i></a>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Default Light Table -->
+</div>

@@ -1,0 +1,130 @@
+﻿@model IEnumerable<ECommerce.Models.OrderConfirmed>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="main-content-container container-fluid px-4">
+    <!-- Page Header -->
+    <div class="page-header row no-gutters py-4">
+        <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+            <span class="text-uppercase page-subtitle">Overview</span>
+            <h3 class="page-title">Order Information</h3>
+        </div>
+    </div>
+    <!-- End Page Header -->
+    <!-- Default Light Table -->
+    <div class="row">
+        <div class="col">
+            <div class="card card-small mb-4">
+                <div class="card-body p-0 pb-3 text-center">
+                    <table class="table mb-0">
+                        <thead class="bg-light">
+                            <tr>
+                                <th scope="col" class="border-0">ID</th>
+                                <th scope="col" class="border-0">Ngày Xác Nhận</th>
+                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.KhachHang.TenKH)</th>
+                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.SanPham.TenSanPham)</th>
+                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.SoLuong)</th>
+                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.TongTien)</th>
+                                <th scope="col" class="border-0">Tình Trạng</th>
+                                <th scope="col" class="border-0"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MaDonHang)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NgayDatHang)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.KhachHang.TenKH)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SanPham.TenSanPham)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SoLuong)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TongTien)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TinhTrang)
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action("Edit", new { id = item.MaDonHang })" class="mb-2 btn btn-sm btn-info mr-1"><i class="material-icons">edit</i></a>
+                                        <a href="@Url.Action("Delete", new { id = item.MaDonHang })" class="mb-2 btn btn-sm btn-danger mr-1"><i class="material-icons">delete</i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Default Light Table -->
+</div>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.KhachHang.TenKH)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SanPham.TenSanPham)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voucher.TenVoucher)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoLuong)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TongTien)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TinhTrang)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.KhachHang.TenKH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SanPham.TenSanPham)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Voucher.TenVoucher)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TongTien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TinhTrang)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.MaDonHang }) |
+                @Html.ActionLink("Details", "Details", new { id=item.MaDonHang }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.MaDonHang })
+            </td>
+        </tr>
+    }
+
+    </table>*@

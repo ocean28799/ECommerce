@@ -1,0 +1,279 @@
+﻿
+@{
+    ViewBag.Title = "TechPi | Ecommerce Website";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+
+}
+<!-- Start Slider area -->
+<div class="slider-area brown__nav slider--15 slide__activation slide__arrow01 owl-carousel owl-theme">
+    <!-- Start Single Slide -->
+    <div class="slide animation__style10 bg-image--1 fullscreen align__center--left">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="slider__content">
+                        <div class="contentbox">
+                            <h2>Purchase <span>your </span></h2>
+                            <h2>favourite <span>Device </span></h2>
+                            <h2>from <span>Here </span></h2>
+                            <a class="shopbtn" href="@Url.Action("Shop","Home")" style="border:3px solid #ce7852;padding:5px">Shop now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Single Slide -->
+    <!-- Start Single Slide -->
+    <div class="slide animation__style10 bg-image--7 fullscreen align__center--left">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="slider__content">
+                        <div class="contentbox">
+                            <h2>Buy <span>your </span></h2>
+                            <h2>favourite <span>Device </span></h2>
+                            <h2>from <span>Here </span></h2>
+                            <a class="shopbtn" href="@Url.Action("Shop","Home")" style="border:3px solid #ce7852;padding:5px">Shop now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Single Slide -->
+</div>
+<!-- End Slider area -->
+<!-- Start BEst Seller Area -->
+<section class="wn__product__area brown--color pt--80  pb--30">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section__title text-center">
+                    <h2 class="title__be--2">Hot <span class="color--theme">Item</span></h2>
+                </div>
+            </div>
+        </div>
+        <!-- Start Single Tab Content -->
+        <div class="furniture--4 border--round arrows_style owl-carousel owl-theme row mt--50">
+            @foreach (var item in ViewBag.hotItem)
+            {
+                <!-- Start Single Product -->
+                <div class="product product__style--3">
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                        <div class="product__thumb" style="height:23em;width:100%">
+                            <a class="first__img" href="@Url.Action("Details","SanPhams",new { id = item.MaSanPham })"><img src="@item.Hinh" alt="product image"></a>
+                            <a class="second__img animation1" href="@Url.Action("Details","SanPhams",new { id = item.MaSanPham })"><img src="@item.Hinh" alt="product image"></a>
+                            <div class="hot__box">
+                                <span class="hot-label">Hot</span>
+                            </div>
+                        </div>
+                        <div class="product__content content--center">
+                            <h4><a href="single-product.html">@item.TenSanPham</a></h4>
+                            <ul class="prize d-flex">
+                                <li>@item.GiaBan.ToString("#,##0").Replace(',', '.') đ</li>
+                                <li class="old_prize">@item.GiaBan.ToString("#,##0").Replace(',', '.') đ</li>
+                            </ul>
+                            <div class="action" style="margin-bottom:40%">
+                                <div class="actions_inner">
+                                    <ul class="add_to_links">
+                                        <li><a class="wishlist" href="@Url.Action("AddIntoCart", "Home", new { maSanPham = item.MaSanPham })"><i class="bi bi-shopping-cart-full"></i></a></li>
+                                        <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Start Single Product -->
+            }
+
+        </div>
+        <!-- End Single Tab Content -->
+    </div>
+</section>
+<!-- Start BEst Seller Area -->
+<!-- Start BEst Seller Area -->
+<section class="wn__product__area  brown--color pt--80  pb--30">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section__title text-center">
+                    <h2 class="title__be--2">Best <span class="color--theme">Seller</span></h2>
+                </div>
+            </div>
+        </div>
+        <!-- Start Single Tab Content -->
+        <div class="furniture--4 border--round arrows_style owl-carousel owl-theme row mt--50">
+            <!-- Start Single Product -->
+            @foreach (var item in ViewBag.bestSeller)
+            {
+                <!-- Start Single Product -->
+                <div class="product product__style--3">
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                        <div class="product__thumb" style="height:23em;width:100%">
+                            <a class="first__img" href="@Url.Action("Details","SanPhams",new { id = item.MaSanPham })"><img src="@item.Hinh" alt="product image"></a>
+                            <a class="second__img animation1" href="@Url.Action("Details","SanPhams",new { id = item.MaSanPham })"><img src="@item.Hinh" alt="product image"></a>
+                            <div class="hot__box">
+                                <span class="hot-label">Best Seller</span>
+                            </div>
+                        </div>
+                        <div class="product__content content--center">
+                            <h4><a href="single-product.html">@item.TenSanPham</a></h4>
+                            <ul class="prize d-flex">
+                                <li>@item.GiaBan.ToString("#,##0").Replace(',', '.') đ</li>
+                                <li class="old_prize">@item.GiaBan.ToString("#,##0").Replace(',', '.') đ</li>
+                            </ul>
+                            <div class="action" style="margin-bottom:40%">
+                                <div class="actions_inner">
+                                    <ul class="add_to_links">
+                                        <li><a class="wishlist" href="@Url.Action("AddIntoCart", "Home", new { maSanPham = item.MaSanPham })"><i class="bi bi-shopping-cart-full"></i></a></li>
+                                        <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Start Single Product -->
+            }
+
+            <!-- Start Single Product -->
+
+        </div>
+        <!-- End Single Tab Content -->
+    </div>
+</section>
+<!-- Start BEst Seller Area -->
+<!-- Start NEwsletter Area -->
+<!-- End NEwsletter Area -->
+<!-- Start Recent Post Area -->
+<section class="wn__recent__post bg--gray ptb--80">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section__title text-center">
+                    <h2 class="title__be--2">Our <span class="color--theme">Review</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="row mt--50">
+            <div class="col-md-6 col-lg-4 col-sm-12">
+                <div class="post__itam">
+                    <div class="content">
+                        <img data-rating="5.0" src="//media.consumeraffairs.com/static/img/icons/stars/ca-stars-5.61b7b8c7580b.svg" alt="Rated with 5 stars" style="width:40%;margin-bottom:5%">
+                        <h3>Elaine Of Little Falls, NJ </h3>
+                        <p>I use TechPi.com often, and 99% of the time, they do an excellent job. With the volume of business they do, it is understandable that occasionally problems will arise. Recently, I ordered a twin size bed, which is a bulky item and more pricey than my normal orders. It had a delivery date of two weeks later (most of my orders I receive in a few days). When the item was not delivered on the date it should have been, Amazon's tracking info stated I would have to contact the delivery company, which I did. They never received the item from TechPi. So, I went to TechPi directly and found that the item made it to my city, but not to the delivery company. It was marked as lost.</p>
+                        <div class="post__time">
+                            <span class="day">Dec 8, 2019</span>
+                            <div class="post-meta">
+                                <ul>
+                                    <li><a href="#"><i class="bi bi-love"></i>72</a></li>
+                                    <li><a href="#"><i class="bi bi-chat-bubble"></i>27</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 col-sm-12">
+                <div class="post__itam">
+                    <div class="content">
+                        <img data-rating="5.0" src="//media.consumeraffairs.com/static/img/icons/stars/ca-stars-5.61b7b8c7580b.svg" alt="Rated with 5 stars" style="width:40%;margin-bottom:5%">
+                        <h3>Juliet of Landover, Maryland </h3>
+                        <p>I am very happy with all my purchases since I have been shopping on TechPi website. I never had to return any of my items. I buy for myself, any member of my family and friends. I like how I can zoom in to see the photos of the item that I am purchasing from all angles. This helps very much with the decision making if I will really make the purchase. Description of the product as well. I like how I can track my items while it’s in transit to me. The convenience of shopping online is the best. You can get just about everything by shopping online on TechPi. The option to pick up my package at locations nearest to me is great. I just love TechPi Prime as well. How can I forget that???? I recommend Tech to anyone that I come in contact with and they’re looking to make a purchase. I always say look ???? it up on Amazon from the comfort and the convenience of wherever you are. Make your purchase and it will come right to your door.</p>
+                        <div class="post__time">
+                            <span class="day">Dec 10, 2019</span>
+                            <div class="post-meta">
+                                <ul>
+                                    <li><a href="#"><i class="bi bi-love"></i>28</a></li>
+                                    <li><a href="#"><i class="bi bi-chat-bubble"></i>7</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 col-sm-12">
+                <div class="post__itam">
+                    <div class="content">
+                        <img data-rating="5.0" src="//media.consumeraffairs.com/static/img/icons/stars/ca-stars-5.61b7b8c7580b.svg" alt="Rated with 5 stars" style="width:40%;margin-bottom:5%">
+                        <h3>Elizabeth of Schenectady, NY </h3>
+                        <p>I absolutely love TechPi. Their selections, prices, notifications and returns are so easy and customer friendly. I am a disabled veteran with metal rods and screws in my lower back. My resistance to the cold is very low and the cold can be painful. I only bought Christmas presents in a store for 2 of my 14 grandchildren. I was also able to avoid the post office by having 4 gifts sent directly to 2 distant states. I have had a few returns and I love how easy it is to send them back. Some I just print a label, repack and leave for my mailman and others I take to a local Kohl's. I do not have to package it up, I just show the QR code Amazon has sent (I show it on my phone or you can print it). It is only a few hours and the money is back in my account. Kohl's will give you your return receipt and a 25% off in store coupon good for a week. Savvy, aren't they. LOL. I have had a few issues that required a phone call directly to Amazon and have been taken care of with courtesy, friendliness and a quick resolution of the problem. As you can see I am in love with TechPi and will continue to buy a $5 or less item or a $1000 plus item. You just can't go wrong!</p>
+                        <div class="post__time">
+                            <span class="day">Dec 8, 2020</span>
+                            <div class="post-meta">
+                                <ul>
+                                    <li><a href="#"><i class="bi bi-love"></i>280</a></li>
+                                    <li><a href="#"><i class="bi bi-chat-bubble"></i>270</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Recent Post Area -->
+<!-- QUICKVIEW PRODUCT -->
+<div id="quickview-wrapper">
+    <!-- Modal -->
+    <div class="modal fade" id="productmodal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal__container" role="document">
+            <div class="modal-content">
+                <div class="modal-header modal__header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-product">
+                        <!-- Start product images -->
+                        <div class="product-images">
+                            <div class="main-image images">
+                                <img alt="big images" src="https://zshop.vn/images/thumbnails/200/200/detailed/116/sony_ilce_7m3k_b_alpha_a7_iii_mirrorless_1394219_qvaf-9n.jpg?t=1601689680">
+                            </div>
+                        </div>
+                        <!-- end product images -->
+                        <div class="product-info">
+                            <h1>Sony Alpha A7 III 1X</h1>
+
+                            <div class="price-box-3">
+                                <div class="s-price-box">
+                                    <span class="new-price">50.500.000</span>
+                                    <span class="old-price">50.500.000</span>
+                                </div>
+                            </div>
+                            <div class="quick-desc" style="width:100%">
+                                - Cảm biến CMOS BSI Full frame 24MP <br />- Bộ xử lý hình ảnh BIONZ X và Front-End LSI <br />- Màn hình cảm ứng LCD 3.0'' 922k - Dot <br />- Quay phim UHD 4K30p <br />- Tốc độ chụp liên tiếp lên đến 10fps <br />- Hệ thống lấy nét tự động với 693 điểm lấy nét <br />- ISO 204800 <br />- Hệ thống ổn định hình ảnh 5 trục <br />- Khe cắm thẻ SD đôi <br />-Cổng USB loại C <br />- Tích hợp kết nối Wi-Fi với NFC <br />-Thiết kế chống chịu thời tiết <br />- Ống kính FE 28 - 70mm f/ 3.5 - 5.6 OSS
+                            </div>
+                            <div class="addtocart-btn">
+                                <a href="@Url.Action("AddIntoCart", "Home", new { maSanPham = 1 })">Add to cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END QUICKVIEW PRODUCT -->
+
+<section class="wn__newsletter__area bg-image--2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 offset-lg-5 col-md-12 col-12 ptb--150">
+                <div class="section__title text-center">
+                    <h2 style="color:#78daff">Stay With Us</h2>
+                </div>
+                <div class="newsletter__block text-center">
+                    <form action="#">
+                        <div class="newsletter__box">
+                            <input type="email" placeholder="Enter your e-mail">
+                            <button>Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,301 @@
+﻿@model ECommerce.Models.KhachHang
+@{
+    ViewBag.Title = "TechPi | Edit Information";
+    Layout = "~/Views/Shared/_LayoutUserInfo.cshtml";
+}
+
+    <style>
+        ::-webkit-scrollbar {
+            width: 2px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #c3c3c3;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #686868;
+        }
+
+            /* Handle on hover */
+            ::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
+    </style>
+<div class="color-switcher animated">
+    <h5>Accent Color</h5>
+    <ul class="accent-colors">
+        <li class="accent-primary active" data-color="primary">
+            <i class="material-icons">check</i>
+        </li>
+        <li class="accent-secondary" data-color="secondary">
+            <i class="material-icons">check</i>
+        </li>
+        <li class="accent-success" data-color="success">
+            <i class="material-icons">check</i>
+        </li>
+        <li class="accent-info" data-color="info">
+            <i class="material-icons">check</i>
+        </li>
+        <li class="accent-warning" data-color="warning">
+            <i class="material-icons">check</i>
+        </li>
+        <li class="accent-danger" data-color="danger">
+            <i class="material-icons">check</i>
+        </li>
+    </ul>
+    <div class="actions mb-4">
+        <a class="mb-2 btn btn-sm btn-primary w-100 d-table mx-auto extra-action" href="https://www.facebook.com/profile.php?id=100007159365611">
+            <i class="material-icons">cloud</i> Contact with me ?
+        </a>
+    </div>
+
+    <div class="close">
+        <i class="material-icons">close</i>
+    </div>
+</div>
+<div class="color-switcher-toggle animated pulse infinite">
+    <i class="material-icons">settings</i>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Main Sidebar -->
+        <aside class="main-sidebar col-12 col-md-3 col-lg-2 px-0">
+            <div class="main-navbar">
+                <nav class="navbar align-items-stretch navbar-light bg-white flex-md-nowrap border-bottom p-0" style="background:#f1f7ff">
+                    <a class="navbar-brand w-100 mr-0" href="@Url.Action("Index","Home")" style="line-height: 25px">
+                        <div class="d-table m-auto">
+                            <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 25px;" src="~/Admin/images/water-drop.svg" alt="Administrator">
+                            <span class="d-none d-md-inline ml-1">TechPi Ecommerce</span>
+                        </div>
+                    </a>
+                    <a class="toggle-sidebar d-sm-inline d-md-none d-lg-none">
+                        <i class="material-icons">&#xE5C4;</i>
+                    </a>
+                </nav>
+            </div>
+
+            <div class="nav-wrapper">
+                @if (Session["tmp1"].ToString() == "1")
+                {
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="@Url.Action("UserInformation","User",new { id=Session["UserID"].ToString()})">
+                                <i class="material-icons">person</i>
+                                <span>My Information</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="@Url.Action("ChoXacNhan","Home")">
+                                <i class="material-icons">vertical_split</i>
+                                <span>My Order</span>
+                            </a>
+                        </li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("UserInformation","User",new { id=Session["UserID"].ToString()})">
+                                <i class="material-icons">person</i>
+                                <span>My Information</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="@Url.Action("ChoXacNhan","Home")">
+                                <i class="material-icons">vertical_split</i>
+                                <span>My Order</span>
+                            </a>
+                        </li>
+                    </ul>
+                }
+
+            </div>
+        </aside>
+        <!-- End Main Sidebar -->
+        <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+            <div class="main-navbar sticky-top bg-white">
+                <!-- Main Navbar -->
+                <nav class="navbar align-items-stretch navbar-light flex-md-nowrap p-0" style="background:#f1f7ff">
+
+                    <ul class="navbar-nav border-left flex-row " style="padding-left:78%">
+                        <li class="nav-item border-right dropdown notifications">
+                            <a class="nav-link nav-link-icon text-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="nav-link-icon__wrapper">
+                                    <i class="material-icons">&#xE7F4;</i>
+                                    <span class="badge badge-pill badge-danger">2</span>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-small" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="#">
+                                    <div class="notification__icon-wrapper">
+                                        <div class="notification__icon">
+                                            <i class="material-icons">&#xE6E1;</i>
+                                        </div>
+                                    </div>
+                                    <div class="notification__content">
+                                        <span class="notification__category">Analytics</span>
+                                        <p>
+                                            Your website’s active users count increased by
+                                            <span class="text-success text-semibold">28%</span> in the last week. Great job!
+                                        </p>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <div class="notification__icon-wrapper">
+                                        <div class="notification__icon">
+                                            <i class="material-icons">&#xE8D1;</i>
+                                        </div>
+                                    </div>
+                                    <div class="notification__content">
+                                        <span class="notification__category">Sales</span>
+                                        <p>
+                                            Last week your store’s sales count decreased by
+                                            <span class="text-danger text-semibold">5.52%</span>. It could have been worse!
+                                        </p>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item notification__all text-center" href="#"> View all Notifications </a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                <img class="user-avatar rounded-circle mr-2" src="~/Admin/images/avatars/user.png" alt="User Avatar">
+                                <span class="d-none d-md-inline-block" style="font-weight:600;font-family:'Times New Roman', Times, serif">@Session["UserName"].ToString()</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-small">
+                                <a class="dropdown-item" href="@Url.Action("Details","KhachHangs",new { id=Session["UserID"].ToString()})">
+                                    <i class="material-icons">&#xE7FD;</i> Profile
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item text-danger" href="@Url.Action("LogOut","Authentication")">
+                                    <i class="material-icons text-danger">&#xE879;</i> Logout
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                    <nav class="nav">
+                        <a href="#" class="nav-link nav-link-icon toggle-sidebar d-md-inline d-lg-none text-center border-left" data-toggle="collapse" data-target=".header-navbar" aria-expanded="false" aria-controls="header-navbar">
+                            <i class="material-icons">&#xE5D2;</i>
+                        </a>
+                    </nav>
+                </nav>
+            </div>
+            <!-- / .main-navbar -->
+
+            <div class="main-content-container container-fluid px-4">
+                <!-- Page Header -->
+                <div class="page-header row no-gutters py-4">
+                    <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                        <span class="text-uppercase page-subtitle">Tổng quát</span>
+                        <h3 class="page-title">Hồ Sơ Cá Nhân</h3>
+                    </div>
+                </div>
+                <!-- End Page Header -->
+                <!-- Default Light Table -->
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="card card-small mb-4">
+                            <div class="card-header border-bottom">
+                                <h6 class="m-0">Thông Tin Tài Khoản</h6>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item p-3">
+                                    <div class="row">
+                                        <div class="col">
+                                            @using (Html.BeginForm())
+                                            {
+                                                <h6>@Html.AntiForgeryToken()</h6>
+                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                                @Html.HiddenFor(model => model.MaKH)
+                                                <div class="form-group">
+                                                    <label for="feEmailAddress">@Html.DisplayNameFor(model => model.TenKH)</label>
+                                                    @Html.EditorFor(model => model.TenKH, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.TenKH, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="ngaySinh">Ngày Sinh</label><br />
+                                                    <input type="date" class="form-input" name="ngaySinh" id="ngaySinh" value="@Html.DisplayFor(model => model.NgaySinh)" placeholder="Your Date Of Birth" style="width:100%;padding:1%;border:1px solid #e1e5eb;border-radius:0.25rem;color:#495057;line-height:1.5" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="feEmailAddress">Tên Tài Khoản</label>
+                                                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="fePassword">Mật Khẩu</label>
+                                                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="feInputAddress">@Html.DisplayNameFor(model => model.DiaChi)</label>
+                                                    @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="feInputAddress">@Html.DisplayNameFor(model => model.SDT)</label>
+                                                    @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group" hidden>
+                                                    <label for="feInputAddress">@Html.DisplayNameFor(model => model.MaQuyen)</label>
+                                                    @Html.EditorFor(model => model.MaQuyen, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.MaQuyen, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group" hidden>
+                                                    <label for="feInputAddress">@Html.DisplayNameFor(model => model.MaLoaiKH)</label>
+                                                    @Html.EditorFor(model => model.MaLoaiKH, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.MaLoaiKH, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group" hidden>
+                                                    <label for="feInputAddress">@Html.DisplayNameFor(model => model.DiemTichLuy)</label>
+                                                    @Html.EditorFor(model => model.DiemTichLuy, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.DiemTichLuy, "", new { @class = "text-danger" })
+                                                </div>
+                                                <input type="submit" class="mb-2 btn btn-info mr-2" style="margin:2.5%;margin-left:89%;font-weight:500" value="Cập Nhật">
+                                            }
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="main-footer d-flex p-2 px-3 bg-white border-top">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
+                </ul>
+                <span class="copyright ml-auto my-auto mr-2">
+                    Ecommerce © 2020
+                    <a href="https://gmail.com" rel="nofollow">ocean28799@gmail.com</a>
+                </span>
+            </footer>
+        </main>
+    </div>
+</div>
+
+
+
+
+
+
+

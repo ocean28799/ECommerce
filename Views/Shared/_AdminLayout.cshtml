@@ -1,0 +1,612 @@
+﻿<!DOCTYPE html>
+
+<html class="no-js h-100" lang="en">
+<head>
+    <link rel="shortcut icon" type="image/x-icon" href="~/Admin/images/browser.svg">
+    <link rel="apple-touch-icon" type="image/x-icon" href="~/Admin/images/browser.svg">
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="TechPi - Cửa hàng thương mại điện tử">
+    <meta name="keywords" content="site:techpi-001-site1.gtempurl.com,site:techpi-001-site1, TechPi ECommerce, TechPi, TechPi - Cửa hàng thương mại điện tử" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    @Styles.Render("~/AdminCSS")
+    @Scripts.Render("~/bundles/jquery")
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 2px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #c3c3c3;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #686868;
+        }
+
+            /* Handle on hover */
+            ::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
+    </style>
+</head>
+<body class="h-100">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Main Sidebar -->
+            <aside class="main-sidebar col-12 col-md-3 col-lg-2 px-0">
+                <div class="main-navbar">
+                    <nav class="navbar align-items-stretch navbar-light bg-white flex-md-nowrap border-bottom p-0" style="background:#f1f7ff">
+                        <a class="navbar-brand w-100 mr-0" href="@Url.Action("Admin","Authentication")" style="line-height: 25px">
+                            <div class="d-table m-auto">
+                                <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 25px;" src="https://image.flaticon.com/icons/png/128/187/187879.png" alt="Administrator">
+                                <span class="d-none d-md-inline ml-1">Administrator</span>
+                            </div>
+                        </a>
+                        <a class="toggle-sidebar d-sm-inline d-md-none d-lg-none">
+                            <i class="material-icons">&#xE5C4;</i>
+                        </a>
+                    </nav>
+                </div>
+
+                <div class="nav-wrapper">
+                    @if (Session["tmp"].ToString() == "1")
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="@Url.Action("Index","Quyens")">
+                                    <i class="material-icons">
+                                        supervisor_account
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">User Role</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index","Quyens")">
+                                    <i class="material-icons">
+                                        supervisor_account
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">User Role</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+
+                    @if (Session["tmp"].ToString() == "17")
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="@Url.Action("Index","LoaiKhachHangs")">
+                                    <i class="material-icons">
+                                        card_membership
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">Customer Type</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index","LoaiKhachHangs")">
+                                    <i class="material-icons">
+                                        card_membership
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">Customer Type</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+
+                    @if (Session["tmp"].ToString() == "2")
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="@Url.Action("Index","KhachHangs")">
+                                    <i class="material-icons">
+                                        account_circle
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">Customer</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index","KhachHangs")">
+                                    <i class="material-icons">
+                                        account_circle
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">Customer</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+
+
+                    @if (Session["tmp"].ToString() == "3")
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="@Url.Action("Index","DanhMucs")">
+                                    <i class="material-icons">
+                                        list
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">Category</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index","DanhMucs")">
+                                    <i class="material-icons">
+                                        list
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">Category</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+
+                    @if (Session["tmp"].ToString() == "10")
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="@Url.Action("Index","ThuongHieux")">
+                                    <i class="material-icons">
+                                        branding_watermark
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">Brand</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index","ThuongHieux")">
+                                    <i class="material-icons">
+                                        branding_watermark
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">Brand</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+
+                    @if (Session["tmp"].ToString() == "4")
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="@Url.Action("Index","SanPhams")">
+                                    <i class="material-icons">
+                                        camera
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">Product</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index","SanPhams")">
+                                    <i class="material-icons">
+                                        camera
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">Product</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+
+                    @if (Session["tmp"].ToString() == "5")
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="@Url.Action("Index","Reviews")">
+                                    <i class="material-icons">
+                                        rate_review
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">Review</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index","Reviews")">
+                                    <i class="material-icons">
+                                        rate_review
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">Review</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+
+
+                    @if (Session["tmp"].ToString() == "6")
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="@Url.Action("Index","Vouchers")">
+                                    <i class="material-icons">
+                                        card_giftcard
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">Voucher</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index","Vouchers")">
+                                    <i class="material-icons">
+                                        card_giftcard
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">Voucher</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+
+                    @if (Session["tmp"].ToString() == "7")
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="@Url.Action("Index","Orders")">
+                                    <i class="material-icons">
+                                        reorder
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">New Order</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index","Orders")">
+                                    <i class="material-icons">
+                                        reorder
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">New Order</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+
+
+                    @if (Session["tmp"].ToString() == "11")
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="@Url.Action("Index","ChiTietGioHangs")">
+                                    <i class="material-icons">
+                                        details
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">New Order Details</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index","ChiTietGioHangs")">
+                                    <i class="material-icons">
+                                        details
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">New Order Details</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+
+
+                    @if (Session["tmp"].ToString() == "9")
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="@Url.Action("Index","XacNhanDonHangs")">
+                                    <i class="material-icons">
+                                        confirmation_number
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">Confirmed Order</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index","XacNhanDonHangs")">
+                                    <i class="material-icons">
+                                        confirmation_number
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">Confirmed Order</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+
+
+                    @if (Session["tmp"].ToString() == "12")
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="@Url.Action("Index","OrderConfirmedDetails")">
+                                    <i class="material-icons">
+                                        details
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">Confirmed Order Details</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index","OrderConfirmedDetails")">
+                                    <i class="material-icons">
+                                        details
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">Confirmed Order Details</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+
+
+                    @if (Session["tmp"].ToString() == "14")
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="@Url.Action("Index","HuyDonHangs")">
+                                    <i class="material-icons">
+                                        cancel_presentation
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">Canceled Order</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index","HuyDonHangs")">
+                                    <i class="material-icons">
+                                        cancel_presentation
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">Canceled Order</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+
+
+                    @if (Session["tmp"].ToString() == "8")
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="@Url.Action("Index","LoginManages")">
+                                    <i class="material-icons">
+                                        history_edu
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">Login History</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index","LoginManages")">
+                                    <i class="material-icons">
+                                        history_edu
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">Login History</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+
+                    @if (Session["tmp"].ToString() == "15")
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="@Url.Action("Index","TruyCaps")">
+                                    <i class="material-icons">
+                                        turned_in
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">Product Access</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index","TruyCaps")">
+                                    <i class="material-icons">
+                                        turned_in
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">Product Access</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+
+
+                    @if (Session["tmp"].ToString() == "16")
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="@Url.Action("Index","ChiTietTruyCaps")">
+                                    <i class="material-icons">
+                                        turned_in
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">Access Details</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index","ChiTietTruyCaps")">
+                                    <i class="material-icons">
+                                        turned_in
+                                    </i>
+                                    <span style="font-weight:500;font-style:italic">Access Details</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+                </div>
+            </aside>
+            <!-- End Main Sidebar -->
+            <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+                <div class="main-navbar sticky-top bg-white">
+                    <!-- Main Navbar -->
+                    <nav class="navbar align-items-stretch navbar-light flex-md-nowrap p-0" style="background:#f1f7ff">
+
+                        <ul class="navbar-nav border-left flex-row " style="padding-left:78%">
+                            <li class="nav-item border-right dropdown notifications">
+                                <a class="nav-link nav-link-icon text-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <div class="nav-link-icon__wrapper">
+                                        <i class="material-icons">&#xE7F4;</i>
+                                        <span class="badge badge-pill badge-danger">2</span>
+                                    </div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-small" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="#">
+                                        <div class="notification__icon-wrapper">
+                                            <div class="notification__icon">
+                                                <i class="material-icons">&#xE6E1;</i>
+                                            </div>
+                                        </div>
+                                        <div class="notification__content">
+                                            <span class="notification__category">Analytics</span>
+                                            <p>
+                                                Your website’s active users count increased by
+                                                <span class="text-success text-semibold">28%</span> in the last week. Great job!
+                                            </p>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <div class="notification__icon-wrapper">
+                                            <div class="notification__icon">
+                                                <i class="material-icons">&#xE8D1;</i>
+                                            </div>
+                                        </div>
+                                        <div class="notification__content">
+                                            <span class="notification__category">Sales</span>
+                                            <p>
+                                                Last week your store’s sales count decreased by
+                                                <span class="text-danger text-semibold">5.52%</span>. It could have been worse!
+                                            </p>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item notification__all text-center" href="#"> View all Notifications </a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <img class="user-avatar rounded-circle mr-2" src="~/Admin/images/avatars/user.png" alt="User Avatar">
+                                    <span class="d-none d-md-inline-block" style="font-weight:600;font-family:'Times New Roman', Times, serif">@Session["UserName"].ToString()</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-small">
+                                    <a class="dropdown-item" href="@Url.Action("UserInformation","User",new { id=Session["UserID"].ToString()})">
+                                        <i class="material-icons">&#xE7FD;</i> Profile
+                                    </a>
+                                    <a class="dropdown-item" href="@Url.Action("Chart","Authentication")">
+                                        <i class="material-icons">insert_chart</i> Chart
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-danger" href="@Url.Action("LogOut","Authentication")">
+                                        <i class="material-icons text-danger">&#xE879;</i> Logout
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                        <nav class="nav">
+                            <a href="#" class="nav-link nav-link-icon toggle-sidebar d-md-inline d-lg-none text-center border-left" data-toggle="collapse" data-target=".header-navbar" aria-expanded="false" aria-controls="header-navbar">
+                                <i class="material-icons">&#xE5D2;</i>
+                            </a>
+                        </nav>
+                    </nav>
+                </div>
+                <!-- / .main-navbar -->
+
+                @RenderBody()
+
+                <footer class="main-footer d-flex p-2 px-3 bg-white border-top" style="margin-top:100%">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Blog</a>
+                        </li>
+                    </ul>
+                    <span class="copyright ml-auto my-auto mr-2">
+                        Ecommerce © 2020
+                        <a href="https://gmail.com" rel="nofollow">ocean28799@gmail.com</a>
+                    </span>
+                </footer>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script src="https://unpkg.com/shards-ui@latest/dist/js/shards.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
+    @Scripts.Render("~/AdminJS1")
+</body>
+</html>

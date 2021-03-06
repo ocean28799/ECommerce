@@ -1,0 +1,226 @@
+﻿
+@{
+    ViewBag.Title = "TechPi | Products";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="ht__bradcaump__area bg-image--1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="bradcaump__inner text-center">
+                    <nav class="bradcaump-content">
+                        <a class="breadcrumb_item" href="@Url.Action("Index","Home")" style="color:#eeaf85">Home</a>
+                        <span class="brd-separetor">/</span>
+                        <span class="breadcrumb_item active">Shop</span>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-shop-sidebar left--sidebar bg--white section-padding--lg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-12 order-2 order-lg-1 md-mt-40 sm-mt-40">
+                <div class="shop__sidebar">
+                    <aside class="wedget__categories poroduct--cat">
+                        <h3 class="wedget__title">Categories</h3>
+                        <ul>
+                            @foreach (var danhMuc in ViewBag.listDanhMuc)
+                            {
+                                <li><a href="@Url.Action("ShopWithCategory","Home",new { maDM = danhMuc.MaDanhMuc })">@danhMuc.TenDanhMuc <span>(@danhMuc.SoLuong)</span></a></li>
+                            }
+                        </ul>
+                    </aside>
+
+                    <aside class="wedget__categories sidebar--banner">
+                        <img src="~/Home/images/sale.png" alt="banner images">
+                        <div class="text">
+                            <h2>new products</h2>
+                            <h6>save up to <br> <strong>40%</strong>off</h6>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+            <div class="col-lg-9 col-12 order-1 order-lg-2">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="shop__list__wrapper d-flex flex-wrap flex-md-nowrap justify-content-between">
+                            <div class="shop__list nav justify-content-center" role="tablist">
+                                <a class="nav-item nav-link active" data-toggle="tab" href="#nav-grid" role="tab"><i class="fa fa-th"></i></a>
+                                <a class="nav-item nav-link" data-toggle="tab" href="#nav-list" role="tab"><i class="fa fa-list"></i></a>
+                            </div>
+                            <p>Hiển thị sản phẩm @ViewBag.a–@ViewBag.b trên tổng số @ViewBag.TongSanPham sản phẩm</p>
+                            <div class="orderby__wrapper">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab__container">
+                    <div class="shop-grid tab-pane fade show active" id="nav-grid" role="tabpanel">
+                        <div class="row" style="padding:3%">
+                            <!-- Start Single Product -->
+                            @for (int i = 0; i < ViewBag.count; i++)
+                            {
+                                foreach (var sanPham in ViewBag.ds)
+                                {
+                                    <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12" style="margin-bottom:5%;padding:5%;padding-bottom:0">
+                                        <div class="product__thumb">
+                                            <a class="first__img" href="@Url.Action("Details","SanPhams",new { id = sanPham.MaSanPham })"><img src="@sanPham.Hinh" alt="product image"></a>
+                                            <a class="second__img animation1" href="@Url.Action("Details","SanPhams",new { id = sanPham.MaSanPham })"><img src="@sanPham.Hinh" alt="product image"></a>
+                                            @if (sanPham.TinhTrang == "Sản Phẩm Hot" & sanPham.SoLuong == 0)
+                                            {
+                                                <div class="hot__box">
+                                                    <span class="hot-label">hot</span>
+                                                </div>
+                                                <div class="hot__box" style="margin:32% 15%;font-size:1em;font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;background:#dedede;color:#3a3a3a;border:1px solid #ccc;border-radius:16px;width:70%">
+                                                    <span class="hot-label">sold out</span>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="hot__box">
+                                                    <span class="hot-label">in stock</span>
+                                                </div>
+                                            }
+                                        </div>
+                                        <div class="product__content content--center">
+                                            <h4><a href="single-product.html">@sanPham.TenSanPham</a></h4>
+                                            <ul class="prize d-flex">
+                                                <li>@sanPham.GiaBan.ToString("#,##0").Replace(',', '.')</li>
+                                                <li class="old_prize">@sanPham.GiaBan.ToString("#,##0").Replace(',', '.')</li>
+                                            </ul>
+                                            <div class="action">
+                                                <div class="actions_inner" style="margin-bottom:20%">
+                                                    <ul class="add_to_links">
+                                                        <li><a class="wishlist" href="@Url.Action("AddIntoCart", "Home", new { maSanPham = sanPham.MaSanPham })"><i class="bi bi-shopping-cart-full"></i></a></li>
+                                                        <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                break;
+                            }
+                            <!-- End Single Product -->
+
+                        </div>
+                        <ul class="wn__pagination">
+
+                            @if (ViewBag.page > 0)
+                            {
+                                <li>
+                                    <a href="@Url.Action("ShopWithCategory","Home",new { page = ViewBag.page -1,quantityBook = ViewBag.quantityBook,maDM = ViewBag.maDM})">
+                                        <i class="zmdi zmdi-chevron-left"></i>
+                                    </a>
+                                </li>
+                            }
+
+                            @for (int i = 0; i <= ViewBag.count; i++)
+                            {
+                                if (ViewBag.page == null || ViewBag.page == i)
+                                {
+                                    <li class="active">
+                                        <a href="@Url.Action("ShopWithCategory","Home",new { page =i ,quantityBook = ViewBag.quantityBook ,maDM = ViewBag.maDM})">@i</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="page-item">
+                                        <a href="@Url.Action("ShopWithCategory","Home",new { page =i ,quantityBook = ViewBag.quantityBook ,maDM = ViewBag.maDM})">@i</a>
+                                    </li>
+                                }
+
+                            }
+
+                            @if (ViewBag.page < ViewBag.count)
+                            {
+                                <li>
+                                    <a href="@Url.Action("ShopWithCategory","Home",new { page = ViewBag.page +1,quantityBook = ViewBag.quantityBook,maDM = ViewBag.maDM})">
+                                        <i class="zmdi zmdi-chevron-right"></i>
+                                    </a>
+                                </li>
+                            }
+
+                        </ul>
+                    </div>
+                    <div class="shop-grid tab-pane fade" id="nav-list" role="tabpanel">
+                        <div class="list__view__wrapper">
+                            <!-- Start Single Product -->
+                            @for (int i = 0; i < ViewBag.count; i++)
+                            {
+                                foreach (var sanPham in ViewBag.ds)
+                                {
+                                    <div class="list__view" style="padding:5%">
+                                        <div class="thumb">
+                                            <a class="first__img" href="@Url.Action("Details","SanPhams",new { id = sanPham.MaSanPham })"><img src="@sanPham.Hinh" alt="product images"></a>
+                                            <a class="second__img animation1" href="@Url.Action("Details","SanPhams",new { id = sanPham.MaSanPham })"><img src="@sanPham.Hinh" alt="product images"></a>
+                                        </div>
+                                        <div class="content">
+                                            <h2><a href="@Url.Action("Details","SanPhams",new { id = sanPham.MaSanPham })">@sanPham.TenSanPham</a></h2>
+
+                                            <ul class="prize__box">
+                                                <li style="color:#cc0a0a;font-weight:600">@sanPham.GiaBan.ToString("#,##0").Replace(',', '.')</li>
+                                                <li class="old__prize">@sanPham.GiaBan.ToString("#,##0").Replace(',', '.')</li>
+                                            </ul>
+                                            <p style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;max-height:18%;text-overflow:ellipsis;overflow:hidden">@sanPham.TomTat</p>
+                                            <ul class="cart__action d-flex">
+                                                <li class="cart"><a href="@Url.Action("AddIntoCart", "Home", new { maSanPham = sanPham.MaSanPham })">Add to cart</a></li>
+                                                <li class="wishlist"><a href="#"></a></li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                }
+                                break;
+                            }
+                            <!-- End Single Product -->
+                            <ul class="wn__pagination">
+
+                                @if (ViewBag.page > 0)
+                                {
+                                    <li>
+                                        <a href="@Url.Action("ShopWithCategory","Home",new { page = ViewBag.page -1,quantityBook = ViewBag.quantityBook,maDM = ViewBag.maDM})">
+                                            <i class="zmdi zmdi-chevron-left"></i>
+                                        </a>
+                                    </li>
+                                }
+
+                                @for (int i = 0; i <= ViewBag.count; i++)
+                                {
+                                    if (ViewBag.page == null || ViewBag.page == i)
+                                    {
+                                        <li class="active">
+                                            <a href="@Url.Action("ShopWithCategory","Home",new { page =i ,quantityBook = ViewBag.quantityBook,maDM = ViewBag.maDM })">@i</a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="page-item">
+                                            <a href="@Url.Action("ShopWithCategory","Home",new { page =i ,quantityBook = ViewBag.quantityBook,maDM = ViewBag.maDM })">@i</a>
+                                        </li>
+                                    }
+
+                                }
+
+                                @if (ViewBag.page < ViewBag.count)
+                                {
+                                    <li>
+                                        <a href="@Url.Action("ShopWithCategory","Home",new { page = ViewBag.page +1,quantityBook = ViewBag.quantityBook,maDM = ViewBag.maDM})">
+                                            <i class="zmdi zmdi-chevron-right"></i>
+                                        </a>
+                                    </li>
+                                }
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

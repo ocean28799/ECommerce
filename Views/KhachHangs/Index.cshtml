@@ -1,0 +1,232 @@
+﻿@model IEnumerable<ECommerce.Models.KhachHang>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<head>
+    <style>
+        td.a {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100px;
+        }
+    </style>
+</head>
+<div class="main-content-container container-fluid px-4">
+    <!-- Page Header -->
+    <div class="page-header row no-gutters py-4">
+        <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+            <span class="text-uppercase page-subtitle">Overview</span>
+            <h3 class="page-title">Customer Information</h3>
+        </div>
+    </div>
+    <!-- End Page Header -->
+    <!-- Default Light Table -->
+    <div class="row">
+        <div class="col">
+            <div class="card card-small mb-4">
+                <div class="card-header border-bottom">
+                    <a href="@Url.Action("Create", "KhachHangs")" class="mb-2 btn btn-outline-primary mr-2" style="font-size:16px;font-weight:500"><i class="material-icons">add</i>  Create New</a>
+                    <form action="@Url.Action("Index","KhachHangs")">
+                        <div class="form-row" style="margin-top:1%">
+
+                            <div class="form-group col-md-4">
+                                @if (ViewBag.activeLoaiKH != null)
+                                {
+                                    <select class="form-control is-valid" name="loaiKH">
+                                        <option value="">Customer Type...</option>
+                                        @foreach (var item in ViewBag.loaiKH)
+                                        {
+                                            if (item.MaLoaiKH == ViewBag.activeLoaiKH)
+                                            {
+                                                <option selected value="@item.MaLoaiKH">@item.TenLoaiKH</option>
+
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.MaLoaiKH">@item.TenLoaiKH</option>
+                                            }
+
+                                        }
+
+                                    </select>
+                                }
+                                else
+                                {
+                                    <select class="form-control" name="loaiKH">
+                                        <option selected value="">Customer Type...</option>
+                                        @foreach (var item in ViewBag.loaiKH)
+                                        {
+                                            <option value="@item.MaLoaiKH">@item.TenLoaiKH</option>
+                                        }
+
+                                    </select>
+                                }
+
+                            </div>
+                            <div class="form-group col-md-4">
+                                @if (ViewBag.activeLoaiTK != null)
+                                {
+                                    <select class="form-control is-valid" name="loaiTK">
+                                        <option value="">User Role...</option>
+                                        @foreach (var item in ViewBag.loaiTK)
+                                        {
+                                            if (item.MaQuyen == ViewBag.activeLoaiTK)
+                                            {
+                                                <option selected value="@item.MaQuyen">@item.TenQuyen</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.MaQuyen">@item.TenQuyen</option>
+                                            }
+
+                                        }
+                                    </select>
+                                }
+                                else
+                                {
+                                    <select class="form-control" name="loaiTK">
+                                        <option selected value="">User Role...</option>
+                                        @foreach (var item in ViewBag.loaiTK)
+                                        {
+                                            <option value="@item.MaQuyen">@item.TenQuyen</option>
+                                        }
+                                    </select>
+                                }
+
+                            </div>
+                            <div class="form-group col-md-4">
+                                <button type="submit" class="btn btn-sm btn-white ml-auto mr-auto ml-sm-auto mr-sm-0 mt-3 mt-sm-0"><i class="fas fa-search" style="font-size:1.2rem;padding:2%"> Search</i> </button>
+                            </div>
+                        </div>
+                    </form>
+                    <form action="@Url.Action("Index","KhachHangs")">
+                        <div class="form-group" style="width:66%">
+                            <div class="input-group mb-3">
+                                
+                                <input type="text" class="form-control" placeholder="Input Phone Number" aria-label="PhoneNumber" name="phoneNumber" aria-describedby="basic-addon1">
+                                <div class="input-group-prepend">
+                                    <button type="submit" style="cursor:pointer" class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-body p-0 pb-3 text-center">
+                    <table class="table mb-0">
+                        <thead class="bg-light">
+                            <tr>
+                                <th scope="col" class="border-0">ID</th>
+                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.Quyen.TenQuyen)</th>
+                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.TenKH)</th>
+                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.DiaChi)</th>
+                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.SDT)</th>
+                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.Email)</th>
+                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.UserName)</th>
+                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.DiemTichLuy)</th>
+                                <th scope="col" class="border-0"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MaKH)
+                                    </td>
+                                    <td class="a">
+                                        @Html.DisplayFor(modelItem => item.Quyen.TenQuyen)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TenKH)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DiaChi)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SDT)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UserName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DiemTichLuy)
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action("Edit", new { id = item.MaKH })" class="mb-2 btn btn-sm btn-info mr-1"><i class="material-icons">edit</i></a>
+                                        <a href="@Url.Action("Delete", new { id = item.MaKH })" class="mb-2 btn btn-sm btn-danger mr-1"><i class="material-icons">delete</i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Default Light Table -->
+</div>
+
+
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Quyen.TenQuyen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenKH)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaChi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SDT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quyen.TenQuyen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenKH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaChi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SDT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.MaKH }) |
+                @Html.ActionLink("Details", "Details", new { id=item.MaKH }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.MaKH })
+            </td>
+        </tr>
+    }
+
+    </table>*@

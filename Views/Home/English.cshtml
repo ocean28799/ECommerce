@@ -1,0 +1,141 @@
+﻿
+@{
+    ViewBag.Title = "CheckOut";
+    Layout = "~/Views/Shared/_EmptyLayout.cshtml";
+}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+    <style>
+        .card {
+            margin: 5% 0%;
+        }
+
+        .card-body {
+            margin: 0% 0% 0% 3%;
+            padding: 6% 0%;
+        }
+
+        .a {
+            font-family: serif;
+            padding-left: 5%;
+            padding-right: 5%
+        }
+    </style>
+</head>
+<body style="background-color:#aff4ff">
+    <div class="container">
+
+        <!-- Card deck -->
+        <div class="card-deck row" style="padding:20%;padding-top:10%">
+
+            <!-- Card -->
+            <div class="card" style="border:1px solid;box-shadow:initial;border-radius:12%">
+                <img style="width:10%;margin-left:45%;margin-top:2%" src="https://image.flaticon.com/icons/png/128/3666/3666228.png" alt="logo images">
+                <h1 style="text-align:center;margin-top:2%;margin-bottom:3%;color:#0f146d;font-family:Amazone">Cảm ơn bạn đã đặt hàng tại TechPi!</h1>
+                <h4 class="a" style="        font-family: Arial, Helvetica, sans-serif">Xin chào Anh Đức ,</h4>
+                <h5 class="a">TechPi đã nhận được yêu cầu đặt hàng của bạn và đang xử lý nhé. Bạn sẽ nhận được thông báo tiếp theo khi đơn hàng đã sẵn sàng được giao.</h5>
+                <a href="@Url.Action("Index","Home")" style="margin-left:29%;margin-top:2%"><img src="https://ci3.googleusercontent.com/proxy/rgGaVkpBC9y2CURSeRFSROpS0ByC4Qq9V3vEt6gen2zTZT5x7XjzIh6-Nz1fBJL3KO4LuV4wqLRNzL1p6JoWmoesROrsDCpTRJkgC18DtOyZAwnUd0yv_QqTxnF_4Qy1Ft_cQiwB-vTCLg=s0-d-e1-ft#http://static.cdn.responsys.net/i5/responsysimages/content/lazada/btn_TrackOrder_vn.jpg" style="max-width:300px" border="0" /></a>
+                <hr />
+                <div class="row">
+                    <div class="col-md-2">
+                        <img style="width:55%;padding:5%;margin-left:33%" src="https://image.flaticon.com/icons/png/128/854/854878.png" />
+                    </div>
+                    <div class="col-md-9">
+                        <h5 style="padding:5%;font-family:sans-serif">Đơn hàng được giao đến</h5>
+                    </div>
+                </div>
+                <div class="row" style="padding:5%;padding-bottom:1%;padding-top:0">
+                    <div class="col-md-4" style="font-family:sans-serif;color:#0f146d;font-weight:600">
+                        Tên Người Nhận:
+                    </div>
+                    <div class="col-md-7">
+                        Anh Đức
+                    </div>
+
+                </div>
+                <div class="row" style="padding:5%;padding-bottom:1%;padding-top:0">
+                    <div class="col-md-4" style="font-family:sans-serif;color:#0f146d;font-weight:600">
+                        Địa chỉ nhận:
+                    </div>
+                    <div class="col-md-7">
+                        SaiGon
+                    </div>
+
+                </div>
+                <div class="row" style="padding:5%;padding-bottom:1%;padding-top:0">
+                    <div class="col-md-4" style="font-family:sans-serif;color:#0f146d;font-weight:600">
+                        Điện Thoại:
+                    </div>
+                    <div class="col-md-7">
+                        022134568
+                    </div>
+
+                </div>
+                <div class="row" style="padding:5%;padding-bottom:1%;padding-top:0">
+                    <div class="col-md-4" style="font-family:sans-serif;color:#0f146d;font-weight:600">
+                        Email:
+                    </div>
+                    <div class="col-md-7">
+                        ocean28799@gmail.com
+                    </div>
+
+                </div>
+                <div class="row" style="padding:5%;padding-bottom:1%;padding-top:0">
+                    <div class="col-md-4" style="font-family:sans-serif;color:#0f146d;font-weight:600">
+                        Total:
+                    </div>
+                    <div class="col-md-7">
+                        50.100.220 đ
+                    </div>
+
+                </div>
+                <hr />
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <img style="width:55%;padding:5%;margin-left:33%" src="https://image.flaticon.com/icons/png/128/679/679821.png" />
+                    </div>
+                    <div class="col-md-9">
+                        <h5 style="padding:5%;font-family:sans-serif">Kiện Hàng</h5>
+                    </div>
+                </div>
+                <p class="a" style="color:#828282;padding-bottom:0;margin-bottom:0">Được bán bởi: TechPi Official Store</p>
+                <p class="a" style="color:#828282;margin-bottom:5%">Được giao bởi: TechPi Express</p>
+
+                @foreach (var item in (dynamic)ViewData["data"])
+                {
+                    <div class="row" style="padding:5%;padding-bottom:1%;padding-top:0">
+                        <div class="col-md-4" style="font-family:sans-serif;color:#0f146d;font-weight:600">
+                            <img src="@item.Hinh" style="width:100%;padding:10%" />
+                        </div>
+                        <div class="col-md-7">
+                            <a href="@Url.Action("Details","SanPhams",new { id = item.MaSanPham })"><h5 class="a" style="color:#173948;font-family:sans-serif">@item.TenSanPham</h5></a>
+                            <h5 class="a" style="color:#585858">Đơn giá: @item.DonGia.ToString("#,##0").Replace(',', '.') đ</h5>
+                            <h5 class="a" style="color:#585858">Số Lượng: @item.SoLuong</h5>
+                            <h5 class="a" style="color:#dd3937">Thành Tiền: @item.ThanhTien.ToString("#,##0").Replace(',', '.') đ</h5>
+                        </div>
+
+                    </div>
+                    <hr style="width:60%;margin-left:20%;margin-bottom:10%;margin-top:5%"/>
+                }
+
+
+            </div>
+            <!-- Card -->
+
+
+
+        </div>
+        <!-- Card deck -->
+
+    </div>
+
+</body>

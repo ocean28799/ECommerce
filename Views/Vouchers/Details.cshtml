@@ -1,0 +1,51 @@
+﻿@model ECommerce.Models.Voucher
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Voucher</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenVoucher)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenVoucher)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GhiChu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GhiChu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayBatDau)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayBatDau)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayHetHan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayHetHan)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.VoucherID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

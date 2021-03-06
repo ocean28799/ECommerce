@@ -1,0 +1,270 @@
+﻿@model IEnumerable<ECommerce.Models.SanPham>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    td.a {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width:100px;
+    }
+</style>
+
+<div class="main-content-container container-fluid px-4">
+    <!-- Page Header -->
+    <div class="page-header row no-gutters py-4">
+        <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+            <span class="text-uppercase page-subtitle">Overview</span>
+            <h3 class="page-title">Product Information</h3>
+        </div>
+    </div>
+    <!-- End Page Header -->
+    <!-- Default Light Table -->
+    <div class="row">
+        <div class="col">
+            <div class="card card-small mb-4">
+                <div class="card-header border-bottom">
+                    <a href="@Url.Action("Create", "SanPhams")" class="mb-2 btn btn-outline-primary mr-2" style="font-size:16px;font-weight:500"><i class="material-icons">add</i>  Create New</a>
+                    <form action="@Url.Action("Index","SanPhams")">
+                        <div class="form-row" style="margin-top:1%">
+
+                            <div class="form-group col-md-4">
+                                @if (ViewBag.activeDanhMuc != null)
+                                {
+                                    <select class="form-control is-valid" name="maDanhMuc">
+                                        <option value="">Category...</option>
+                                        @foreach (var item in ViewBag.danhMuc)
+                                        {
+                                            if (item.MaDanhMuc == ViewBag.activeDanhMuc)
+                                            {
+                                                <option selected value="@item.MaDanhMuc">@item.TenDanhMuc</option>
+
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.MaDanhMuc">@item.TenDanhMuc</option>
+                                            }
+
+                                        }
+
+                                    </select>
+                                }
+                                else
+                                {
+                                    <select class="form-control" name="maDanhMuc">
+                                        <option selected value="">Category...</option>
+                                        @foreach (var item in ViewBag.danhMuc)
+                                        {
+                                            <option value="@item.MaDanhMuc">@item.TenDanhMuc</option>
+                                        }
+
+                                    </select>
+                                }
+
+                            </div>
+                            <div class="form-group col-md-4">
+                                @if (ViewBag.activeThuongHieu != null)
+                                {
+                                    if (ViewBag.activeDanhMuc != null)
+                                    {
+                                        <select class="form-control is-valid" name="maThuongHieu">
+                                            <option value="">Brand...</option>
+                                            @foreach (var item in ViewBag.AlternativeThuongHieu)
+                                            {
+                                                if (item.MaThuongHieu == ViewBag.activeThuongHieu)
+                                                {
+                                                    <option selected value="@item.MaThuongHieu">@item.TenThuongHieu</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.MaThuongHieu">@item.TenThuongHieu</option>
+                                                }
+
+                                            }
+                                        </select>
+                                    }
+                                    else
+                                    {
+                                        <select class="form-control is-valid" name="maThuongHieu">
+                                            <option value="">Brand...</option>
+                                            @foreach (var item in ViewBag.thuongHieu)
+                                            {
+                                                if (item.MaThuongHieu == ViewBag.activeThuongHieu)
+                                                {
+                                                    <option selected value="@item.MaThuongHieu">@item.TenThuongHieu</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.MaThuongHieu">@item.TenThuongHieu</option>
+                                                }
+
+                                            }
+                                        </select>
+                                    }
+
+                                }
+                                else
+                                {
+                                    if (ViewBag.activeDanhMuc != null)
+                                    {
+                                        <select class="form-control" name="maThuongHieu">
+                                            <option selected value="">Brand...</option>
+                                            @foreach (var item in ViewBag.AlternativeThuongHieu)
+                                            {
+                                                <option value="@item.MaThuongHieu">@item.TenThuongHieu</option>
+                                            }
+                                        </select>
+                                    }
+                                    else
+                                    {
+                                        <select class="form-control" name="maThuongHieu">
+                                            <option selected value="">Brand...</option>
+                                            @foreach (var item in ViewBag.thuongHieu)
+                                            {
+                                                <option value="@item.MaThuongHieu">@item.TenThuongHieu</option>
+                                            }
+                                        </select>
+                                    }
+
+                                }
+
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <button type="submit" class="btn btn-sm btn-white ml-auto mr-auto ml-sm-auto mr-sm-0 mt-3 mt-sm-0"><i class="fas fa-search" style="font-size:1.2rem;padding:2%"> Search</i> </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <form action="@Url.Action("Index","SanPhams")">
+                        <div class="form-group" style="width:66%">
+                            <div class="input-group mb-3">
+
+                                <input type="text" class="form-control" placeholder="Input Product Name" aria-label="PhoneNumber" name="productName" aria-describedby="basic-addon1">
+                                <div class="input-group-prepend">
+                                    <button type="submit" style="cursor:pointer" class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="card-body p-0 pb-3 text-center">
+                    <table class="table mb-0" style="text-align:center">
+                        <thead class="bg-light">
+                            <tr>
+                                <th scope="col" class="border-0">ID</th>
+                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.DanhMucs.TenDanhMuc)</th>
+                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.TenSanPham)</th>
+                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.GiaBan)</th>
+                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.SoLuong)</th>
+                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.TinhTrang)</th>
+                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.MoTa)</th>
+                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.Hinh)</th>
+                                <th scope="col" class="border-0"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MaSanPham)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DanhMucs.TenDanhMuc)
+                                </td>
+                                <td class="a">
+                                    @Html.DisplayFor(modelItem => item.TenSanPham)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.GiaBan)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SoLuong)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TinhTrang)
+                                </td>
+                                <td class="a">
+                                    @Html.DisplayFor(modelItem => item.MoTa)
+                                </td>
+                                <td style="max-width:100px">
+                                    <img src=" @Html.DisplayFor(modelItem => item.Hinh)" alt="product image" style="width:50%;max-height:20%" />
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Edit", new { id = item.MaSanPham })" class="mb-2 btn btn-sm btn-info mr-1"><i class="material-icons">edit</i></a>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Default Light Table -->
+</div>
+
+
+
+
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DanhMucs.TenDanhMuc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenSanPham)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiaBan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoTa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TomTat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hinh)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DanhMucs.TenDanhMuc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSanPham)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaBan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoTa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TomTat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hinh)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.MaSanPham }) |
+                @Html.ActionLink("Details", "Details", new { id=item.MaSanPham }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.MaSanPham })
+            </td>
+        </tr>
+    }
+
+    </table>*@

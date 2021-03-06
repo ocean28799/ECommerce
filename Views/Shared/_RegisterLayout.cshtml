@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/Admin/images/water-drop.svg">
+    <link rel="apple-touch-icon" type="image/x-icon" href="~/Admin/images/water-drop.svg">
+    <meta name="description" content="TechPi - Cửa hàng thương mại điện tử">
+    <meta name="keywords" content="site:techpi-001-site1.gtempurl.com,site:techpi-001-site1, TechPi ECommerce, TechPi, TechPi - Cửa hàng thương mại điện tử" />
+    <!-- CSS -->
+    @Styles.Render("~/RegisterCSS")
+    <style>
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #c3c3c3;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #686868;
+        }
+
+            /* Handle on hover */
+            ::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
+    </style>
+</head>
+<body>
+    @RenderBody()
+
+
+    <!-- JS -->
+    @Scripts.Render("~/RegisterJS1")
+
+</body>
+</html>

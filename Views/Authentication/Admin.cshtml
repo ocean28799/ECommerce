@@ -1,0 +1,478 @@
+﻿
+@{
+    ViewBag.Title = "Administrator | TechPi";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<!doctype html>
+
+<div class="main-content-container container-fluid px-4">
+    <!-- Page Header -->
+    <div class="page-header row no-gutters py-4">
+        <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+            <span class="text-uppercase page-subtitle">Dashboard</span>
+            <h3 class="page-title">Statistic Overview</h3>
+        </div>
+    </div>
+    <!-- End Page Header -->
+
+    <div class="row">
+        <div class="col-lg col-md-6 col-sm-6 mb-4">
+            <div class="stats-small stats-small--1 card card-small">
+                <div class="card-body p-0 d-flex">
+                    <div class="d-flex flex-column m-auto">
+                        <div class="stats-small__data text-center">
+                            <span class="stats-small__label text-uppercase"><a href="@Url.Action("Index","SanPhams")">Products</a></span>
+                            <h6 class="stats-small__value count my-3">@ViewBag.product</h6>
+                        </div>
+                    </div>
+                    <canvas height="120" class="blog-overview-stats-small-1"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg col-md-6 col-sm-6 mb-4">
+            <div class="stats-small stats-small--1 card card-small">
+                <div class="card-body p-0 d-flex">
+                    <div class="d-flex flex-column m-auto">
+                        <div class="stats-small__data text-center">
+                            <span class="stats-small__label text-uppercase"><a href="@Url.Action("Index","KhachHangs")">Users</a></span>
+                            <h6 class="stats-small__value count my-3">@ViewBag.user</h6>
+                        </div>
+                    </div>
+                    <canvas height="120" class="blog-overview-stats-small-2"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg col-md-4 col-sm-6 mb-4">
+            <div class="stats-small stats-small--1 card card-small">
+                <div class="card-body p-0 d-flex">
+                    <div class="d-flex flex-column m-auto">
+                        <div class="stats-small__data text-center">
+                            <span class="stats-small__label text-uppercase"><a href="@Url.Action("Index","Orders")">New Orders</a></span>
+                            <h6 class="stats-small__value count my-3">@ViewBag.newOrder</h6>
+                        </div>
+                    </div>
+                    <canvas height="120" class="blog-overview-stats-small-3"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg col-md-4 col-sm-6 mb-4">
+            <div class="stats-small stats-small--1 card card-small">
+                <div class="card-body p-0 d-flex">
+                    <div class="d-flex flex-column m-auto">
+                        <div class="stats-small__data text-center">
+                            <span class="stats-small__label text-uppercase"><a href="@Url.Action("Index","XacNhanDonHangs")">Total Orders</a></span>
+                            <h6 class="stats-small__value count my-3">@ViewBag.totalOrder</h6>
+                        </div>
+                    </div>
+                    <canvas height="120" class="blog-overview-stats-small-4"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- End Small Stats Blocks -->
+
+    <div class="row">
+        <!-- Users Stats -->
+        <div class="col-lg-8 col-md-12 col-sm-12 mb-4">
+            <div class="card card-small">
+                <div class="card-header border-bottom">
+                    <h6 class="m-0">Area Chart</h6>
+                </div>
+                <div class="card-body pt-0">
+                    <figure class="highcharts-figure" style="max-width:100% !important">
+                        <div id="container"></div>
+                    </figure>
+                </div>
+            </div>
+
+        </div>
+        <!-- End Users Stats -->
+        <!-- Users By Device Stats -->
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+            <div class="card card-small h-100">
+                <div class="card-header border-bottom">
+                    <h6 class="m-0">Top 10 Products Access</h6>
+                </div>
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-small list-group-flush">
+                        @foreach (var item in ViewBag.truyCap)
+                        {
+                            <li class="list-group-item d-flex px-3" style="padding:3.5%">
+                                <span class="text-semibold text-fiord-blue"><a href="@Url.Action("Details","SanPhams", new { id = item.MaSanPham})">@item.SanPham.TenSanPham</a></span>
+                                <span class="ml-auto text-right text-semibold text-reagent-gray">@item.SoLanTruyCap</span>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- End Users By Device Stats -->
+    </div>
+
+    <div class="row">
+        <!-- Users Stats -->
+        <div class="col-lg-8 col-md-12 col-sm-12 mb-4">
+            <div class="card card-small">
+                <div class="card-header border-bottom">
+                    <h6 class="m-0">Horizontal Bar Chart</h6>
+                </div>
+                <div class="card-body pt-0">
+                    <figure class="highcharts-figure" style="max-width:100% !important">
+                        <div id="container5"></div>
+                    </figure>
+                </div>
+            </div>
+        </div>
+        <!-- End Users Stats -->
+        <!-- Users By Device Stats -->
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+            <div class="card card-small h-100">
+                <div class="card-header border-bottom">
+                    <h6 class="m-0">Evaluation</h6>
+                </div>
+                <div class="card-body d-flex py-0">
+                    <p style="margin-top:5%">Theo biểu đồ, ta có thể thấy được những sản phẩm mà khách hàng quan tâm nhiều nhất. Song, ta có thể nhập về các mặt hàng này nhiều hơn, còn về phần các sản phẩm khách hàng không quan tâm thì ta sẽ hạn chế nhập hàng về để tránh tồn kho.</p>
+                </div>
+            </div>
+        </div>
+        <!-- End Users By Device Stats -->
+    </div>
+
+    <div class="row">
+        <!-- Users Stats -->
+        <div class="col-lg-8 col-md-12 col-sm-12 mb-4">
+            <div class="card card-small">
+                <div class="card-header border-bottom">
+                    <h6 class="m-0">Vertical Bar Chart</h6>
+                </div>
+                <div class="card-body pt-0">
+                    <figure class="highcharts-figure" style="max-width:100% !important">
+                        <div id="container2"></div>
+                    </figure>
+                </div>
+            </div>
+        </div>
+        <!-- End Users Stats -->
+        <!-- Users By Device Stats -->
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+            <div class="card card-small h-100">
+                <div class="card-header border-bottom">
+                    <h6 class="m-0">Best Seller</h6>
+                </div>
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-small list-group-flush">
+                        @foreach (var item in ViewBag.bestSeller)
+                        {
+                            <li class="list-group-item d-flex px-3" style="padding:3.5%">
+                                <span class="text-semibold text-fiord-blue"><a href="@Url.Action("Details","SanPhams", new { id = item.MaSanPham})">@item.TenSanPham</a></span>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- End Users By Device Stats -->
+    </div>
+
+
+
+
+
+
+
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $.getJSON("/Authentication/GetData", function (data) {
+            var Names = []
+            var Qts = []
+            for (var i = 0; i < data.length; i++) {
+                Names.push(data[i].name);
+                Qts.push(data[i].count);
+            }
+
+            Highcharts.chart('container', {
+                chart: {
+                    type: 'area'
+                },
+                title: {
+                    text: 'Sales Statistic'
+                },
+                subtitle: {
+                    text: 'TechPi'
+                },
+                xAxis: {
+                    categories: Names,
+                    tickmarkPlacement: 'on',
+                    title: {
+                        enabled: false
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: 'Quantity'
+                    },
+                    labels: {
+                        formatter: function () {
+                            return this.value;
+                        }
+                    }
+                },
+                tooltip: {
+                    split: true,
+                    valueSuffix: ' San Pham'
+                },
+                plotOptions: {
+                    area: {
+                        stacking: 'normal',
+                        lineColor: '#666666',
+                        lineWidth: 1,
+                        marker: {
+                            lineWidth: 1,
+                            lineColor: '#666666'
+                        }
+                    }
+                },
+                series: [{
+                    name: 'TechPi',
+                    data: Qts
+                }]
+            });
+            Highcharts.chart('container2', {
+                chart: {
+                    zoomType: 'xy'
+                },
+                title: {
+                    text: 'Sales Statistic'
+                },
+                subtitle: {
+                    text: 'TechPi'
+                },
+                xAxis: [{
+                    categories: Names,
+                    crosshair: true
+                }],
+                yAxis: [{ // Primary yAxis
+                    labels: {
+                        format: '{value}',
+                        style: {
+                            color: Highcharts.getOptions().colors[1]
+                        }
+                    },
+                    title: {
+                        text: 'Quantity',
+                        style: {
+                            color: Highcharts.getOptions().colors[1]
+                        }
+                    }
+                }, { // Secondary yAxis
+                    title: {
+                        text: 'Quantity',
+                        style: {
+                            color: Highcharts.getOptions().colors[0]
+                        }
+                    },
+                    labels: {
+                        format: '{value}',
+                        style: {
+                            color: Highcharts.getOptions().colors[0]
+                        }
+                    },
+                    opposite: true
+                }],
+                tooltip: {
+                    shared: true
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'left',
+                    x: 120,
+                    verticalAlign: 'top',
+                    y: 100,
+                    floating: true,
+                    backgroundColor:
+                        Highcharts.defaultOptions.legend.backgroundColor || // theme
+                        'rgba(255,255,255,0.25)'
+                },
+                series: [{
+                    name: 'Quantity',
+                    type: 'column',
+                    yAxis: 1,
+                    data: Qts,
+
+
+                }, {
+                    name: 'Quantity',
+                    type: 'spline',
+                    data: Qts,
+
+                }]
+            });
+            Highcharts.chart('container3', {
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: 'Sales Statistic'
+                },
+                subtitle: {
+                    text: 'TechPi'
+                },
+                xAxis: {
+                    categories: Names
+                },
+                yAxis: {
+                    title: {
+                        text: 'Quantity'
+                    }
+                },
+                plotOptions: {
+                    line: {
+                        dataLabels: {
+                            enabled: true
+                        },
+                        enableMouseTracking: false
+                    }
+                },
+                series: [{
+                    name: 'Trend',
+                    data: Qts
+                }]
+            });
+            Highcharts.chart('container4', {
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Sales Statistic'
+                },
+                subtitle: {
+                    text: 'TechPi'
+                },
+                xAxis: {
+                    categories: Names,
+                    title: {
+                        text: null
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Quantity',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                tooltip: {
+                    valueSuffix: ' San Pham'
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: -40,
+                    y: 80,
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor:
+                        Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+                    shadow: true
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'TechPi',
+                    data: Qts
+                }]
+            });
+        });
+    });
+
+    $(document).ready(function () {
+        $.getJSON("/Authentication/GetAccessData", function (data) {
+            var Names = []
+            var Qts = []
+            for (var i = 0; i < data.length; i++) {
+                Names.push(data[i].name);
+                Qts.push(data[i].count);
+            }
+
+            Highcharts.chart('container5', {
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Product Access'
+                },
+                subtitle: {
+                    text: 'TechPi'
+                },
+                xAxis: {
+                    categories: Names,
+                    title: {
+                        text: null
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Quantity',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                tooltip: {
+                    valueSuffix: ' Lan'
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: -40,
+                    y: 80,
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor:
+                        Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+                    shadow: true
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'TechPi',
+                    data: Qts
+                }]
+            });
+
+        });
+    });
+</script>

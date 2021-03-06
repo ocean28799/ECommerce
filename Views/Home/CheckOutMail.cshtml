@@ -1,0 +1,62 @@
+﻿
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+    <style>
+        .card {
+            margin: 5% 0%;
+        }
+
+        .card-body {
+            margin: 0% 0% 0% 3%;
+            padding: 6% 0%;
+        }
+
+        .a {
+            font-family: serif;
+            padding-left: 5%;
+            padding-right: 5%;
+            color: #500050;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Card deck -->
+        <div class="card-deck row" style="padding:20%;padding-top:10%;background-color:#3661ffbd">
+
+            <!-- Card -->
+            <div class="card" style="border:1px solid;box-shadow:initial;border-radius:12%;background-color:white;padding:3%">
+                <img style="width:10%;margin-left:45%;margin-top:2%" src="https://image.flaticon.com/icons/png/128/3666/3666228.png" alt="logo images">
+                <h1 style="text-align:center;margin-top:2%;margin-bottom:3%;color:#0f146d;font-family:'Google Sans'">Cảm ơn bạn đã đặt hàng tại TechPi!</h1>
+                <h2 class="a">Xin chào {{CustomerName}} ,</h2>
+                <h3 class="a">TechPi đã nhận được yêu cầu đặt hàng của bạn và đang xử lý nhé. Bạn sẽ nhận được thông báo tiếp theo khi đơn hàng đã sẵn sàng được giao.</h3>
+                <a href="#" style="margin-left:25%;margin-top:2%"><img src="https://ci3.googleusercontent.com/proxy/rgGaVkpBC9y2CURSeRFSROpS0ByC4Qq9V3vEt6gen2zTZT5x7XjzIh6-Nz1fBJL3KO4LuV4wqLRNzL1p6JoWmoesROrsDCpTRJkgC18DtOyZAwnUd0yv_QqTxnF_4Qy1Ft_cQiwB-vTCLg=s0-d-e1-ft#http://static.cdn.responsys.net/i5/responsysimages/content/lazada/btn_TrackOrder_vn.jpg" style="max-width:300px" border="0" /></a>
+                <hr />
+
+                <h2 class="a" style="font-family:sans-serif;color:#0f146d">Thông Tin Người Nhận</h2>
+                <h3 class="a">Tên Người Nhận : {{CustomerName}}</h3>
+                <h3 class="a">Địa Chỉ Nhận   : {{Address}}</h3>
+                <h3 class="a">Số Điện Thoại  : {{Phone}}</h3>
+                <h3 class="a">Email          : {{Email}}</h3>
+                <h3 class="a">Tổng Tiền      : {{Total}} đ</h3>
+
+            </div>
+            <!-- Card -->
+
+
+
+        </div>
+        <!-- Card deck -->
+
+    </div>
+
+</body>

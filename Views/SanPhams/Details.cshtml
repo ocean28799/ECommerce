@@ -1,0 +1,269 @@
+﻿
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="ht__bradcaump__area bg-image--1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="bradcaump__inner text-center">
+                    <nav class="bradcaump-content">
+                        <a class="breadcrumb_item" href="@Url.Action("Index","Home")" style="color:#eeaf85">Home</a>
+                        <span class="brd-separetor">/</span>
+                        <span class="breadcrumb_item active">Product</span>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="maincontent bg--white pt--80 pb--55">
+    <div class="container">
+        @foreach (var sp in ViewBag.sanPham)
+        {
+            <div class="row">
+                <div class="col-lg-9 col-12">
+                    <div class="wn__single__product">
+                        <div class="row">
+                            <div class="col-lg-6 col-12">
+                                <div class="wn__fotorama__wrapper">
+                                    <div class="fotorama wn__fotorama__action" data-nav="thumbs">
+                                        <a style="" href="@sp.Hinh"><img src="@sp.Hinh" alt=""></a>
+                                        <a href="@sp.Hinh"><img src="@sp.Hinh" alt=""></a>
+                                        <a href="@sp.Hinh"><img src="@sp.Hinh" alt=""></a>
+                                        <a href="@sp.Hinh"><img src="@sp.Hinh" alt=""></a>
+                                        <a href="@sp.Hinh"><img src="@sp.Hinh" alt=""></a>
+                                        <a href="@sp.Hinh"><img src="@sp.Hinh" alt=""></a>
+                                        <a href="@sp.Hinh"><img src="@sp.Hinh" alt=""></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-12">
+                                <div class="product__info__main">
+                                    <h1>@sp.TenSanPham</h1>
+                                    <div class="product-reviews-summary d-flex">
+                                        <ul class="rating-summary d-flex">
+                                            <li><i class="zmdi zmdi-star"></i></li>
+                                            <li><i class="zmdi zmdi-star"></i></li>
+                                            <li><i class="zmdi zmdi-star"></i></li>
+                                            <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                            <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div class="price-box">
+                                        <span style="color:#a00101ab">@sp.GiaBan.ToString("#,##0").Replace(',', '.') đ</span>
+                                    </div>
+                                    <div class="product__overview">
+                                        <p>@sp.TomTat</p>
+
+                                    </div>
+                                    <p style="color:#22cc5e;margin-bottom:2%">In Stocks: @sp.SoLuong</p>
+                                    @if (sp.SoLuong == 0)
+                                    {
+                                        <form action="@Url.Action("AddIntoCart", "Home", new { maSanPham = sp.MaSanPham })">
+                                            <div class="box-tocart d-flex">
+                                                <input type="text" value="@sp.MaSanPham" hidden id="maSanPham" name="maSanPham" />
+                                                <span>Qty</span>
+                                                <input class="input-text qty" min="1" max="1" value="1" title="Qty" type="number">
+                                                <div class="addtocart__actions">
+                                                    <button disabled style="background:#6f6f6f" class="tocart" type="submit" title="Add to Cart">Add to Cart</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <form action="@Url.Action("AddIntoCart", "Home", new { maSanPham = sp.MaSanPham })">
+                                            <div class="box-tocart d-flex">
+                                                <input type="text" value="@sp.MaSanPham" hidden id="maSanPham" name="maSanPham" />
+                                                <span>Qty</span>
+                                                <input class="input-text qty" min="1" max="1" value="1" title="Qty" type="number">
+                                                <div class="addtocart__actions">
+                                                    <button class="tocart" type="submit" title="Add to Cart">Add to Cart</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    }
+                                    <div class="product_meta">
+                                        <span class="posted_in">
+                                            Categories:
+                                            @foreach (var item in ViewBag.danhmuc)
+                                            {
+                                                <a style="font-family:sans-serif" href="@Url.Action("ShopWithCategory","Home",new { maDM = item.MaDanhMuc })">@item.TenDanhMuc, </a>
+                                            }
+                                            @foreach (var thuongHieu in ViewBag.thuongHieu)
+                                            {
+                                                <a style="font-family:sans-serif" href="@Url.Action("ShopWithBrand","Home",new { maTH = thuongHieu.MaThuongHieu })">@thuongHieu.TenThuongHieu</a>
+                                            }
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product__info__detailed">
+                        <div class="pro_details_nav nav justify-content-start" role="tablist">
+                            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-details" role="tab">Details</a>
+                            <a class="nav-item nav-link" data-toggle="tab" href="#nav-review" role="tab">Reviews</a>
+                        </div>
+                        <div class="tab__container">
+                            <!-- Start Single Tab Content -->
+                            <div class="pro__tab_label tab-pane fade show active" id="nav-details" role="tabpanel">
+                                <div class="description__attribute">
+                                    <p>@sp.MoTa.</p>
+                                    <ul style="font-weight:600">
+                                        <li>• Sản phẩm 100% chính hãng.</li>
+                                        <li>• Miễn phí vận chuyển. </li>
+                                        <li>• Bảo hành 18 tháng 1 đổi 1.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- End Single Tab Content -->
+                            <!-- Start Single Tab Content -->
+                            <div class="pro__tab_label tab-pane fade" id="nav-review" role="tabpanel">
+                                <div class="review__attribute">
+                                    <h1>Product Reviews</h1>
+                                </div>
+                                <div class="review-fieldset">
+                                    <div class="container">
+                                        @if (ViewBag.review != null)
+                                        {
+                                            foreach (var item in ViewBag.review)
+                                            {
+                                                <div class="row" style="margin-bottom:3%">
+                                                    <div class="col-md-1">
+                                                        <img src="https://www.flaticon.com/svg/static/icons/svg/64/64572.svg" alt="userImg" style="width:100%;height:100%" />
+                                                    </div>
+                                                    <div class="col-md-11">
+                                                        <div class="row">
+                                                            <p style="color:rgba(0,0,0,.54)">@item.NgayDang</p>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <h4 style="font-family:sans-serif">@item.KhachHang.TenKH</h4>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="review__attribute">
+                                                                <div class="review__ratings__type d-flex">
+                                                                    <div class="review-ratings">
+                                                                        <div class="rating-summary d-flex">
+                                                                            <ul class="rating d-flex">
+                                                                                <li><i class="zmdi zmdi-star"></i></li>
+                                                                                <li><i class="zmdi zmdi-star"></i></li>
+                                                                                <li><i class="zmdi zmdi-star"></i></li>
+                                                                                <li><i class="zmdi zmdi-star"></i></li>
+                                                                                <li><i class="zmdi zmdi-star"></i></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <p style="font-family:serif;font-size:1.4em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:100%">@item.NoiDung</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <h4>Chưa có đánh giá cho sản phẩm này!</h4>
+                                        }
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Single Tab Content -->
+                        </div>
+                    </div>
+                    <div class="wn__related__product pt--80 pb--50">
+                        <div class="section__title text-center">
+                            <h2 class="title__be--2">Related Products</h2>
+                        </div>
+                        <div class="row mt--60">
+                            <div class="productcategory__slide--2 arrows_style owl-carousel owl-theme">
+                                <!-- Start Single Product -->
+                                @foreach (var relate in ViewBag.relateProduct)
+                                {
+                                    <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
+                                        <div class="product__thumb">
+                                            <a class="first__img" href="@Url.Action("Details","SanPhams",new { id = relate.MaSanPham })"><img src="@relate.Hinh" alt="product image"></a>
+                                            <a class="second__img animation1" href="@Url.Action("Details","SanPhams",new { id = relate.MaSanPham })"><img src="@relate.Hinh" alt="product image"></a>
+                                            <div class="hot__box">
+                                                <span class="hot-label">New Arrival</span>
+                                            </div>
+                                        </div>
+                                        <div class="product__content content--center">
+                                            <h4><a href="@Url.Action("Details","SanPhams",new { id = relate.MaSanPham })">@relate.TenSanPham</a></h4>
+                                            <ul class="prize d-flex">
+                                                <li>@relate.GiaBan.ToString("#,##0").Replace(',', '.') đ</li>
+                                                <li class="old_prize">@relate.GiaBan.ToString("#,##0").Replace(',', '.') đ</li>
+                                            </ul>
+                                            <div class="action">
+                                                <div class="actions_inner">
+                                                    <ul class="add_to_links">
+                                                        <li><a class="wishlist" href="@Url.Action("AddIntoCart", "Home", new { maSanPham = relate.MaSanPham })"><i class="bi bi-shopping-cart-full"></i></a></li>
+                                                        <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                                <!-- Start Single Product -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-12 md-mt-40 sm-mt-40">
+                    <div class="shop__sidebar">
+                        <aside class="wedget__categories poroduct--cat">
+                            <h3 class="wedget__title">Product Categories</h3>
+                            <ul>
+                                @foreach (var danhMuc in ViewBag.listDanhMuc)
+                                {
+                                    <li><a href="@Url.Action("ShopWithCategory","Home",new { maDM = danhMuc.MaDanhMuc })">@danhMuc.TenDanhMuc <span>(@danhMuc.SoLuong)</span></a></li>
+                                }
+                            </ul>
+                        </aside>
+
+                        <aside class="wedget__categories poroduct--tag">
+                            <h3 class="wedget__title">Product Tags</h3>
+                            <ul>
+                                @foreach (var danhMuc in ViewBag.danhmuc)
+                                {
+                                    <li><a href="@Url.Action("ShopWithCategory","Home",new { maDM = danhMuc.MaDanhMuc })">@danhMuc.TenDanhMuc</a></li>
+                                }
+                                @if (ViewBag.thuongHieu != null)
+                                {
+                                    foreach (var thuongHieu in ViewBag.thuongHieu)
+                                    {
+                                        <li><a href="@Url.Action("ShopWithBrand","Home",new { maTH = thuongHieu.MaThuongHieu })">@thuongHieu.TenThuongHieu</a></li>
+                                    }
+                                }
+                            </ul>
+                        </aside>
+
+                        <aside class="wedget__categories sidebar--banner">
+                            <img src="~/Home/images/sale.png" alt="banner images">
+                            <div class="text">
+                                <h2>new products</h2>
+                                <h6>save up to <br> <strong>40%</strong>off</h6>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,90 @@
+﻿@model ECommerce.Models.KhachHang
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="main-content-container container-fluid px-4">
+    <!-- Page Header -->
+    <div class="page-header row no-gutters py-4">
+        <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+            <span class="text-uppercase page-subtitle">TechPi Administrator</span>
+            <h3 class="page-title">Chi Tiết</h3>
+        </div>
+    </div>
+    <!-- End Page Header -->
+    <!-- Default Light Table -->
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="card card-small mb-4">
+                <div class="card-header border-bottom">
+                    <a href="@Url.Action("Index")" class="mb-2 btn btn-sm btn-outline-danger mr-1"><i class="material-icons">arrow_back</i></a>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item p-3">
+                        <div class="row">
+                            <div class="col">
+                                <dl class="dl-horizontal">
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Quyen.TenQuyen)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Quyen.TenQuyen)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.TenKH)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.TenKH)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.DiaChi)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.DiaChi)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.SDT)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.SDT)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.UserName)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.UserName)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Password)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Password)
+                                    </dd>
+
+                                    <p style="padding:2%">
+                                        @Html.ActionLink("Edit", "Edit", new { id = Model.MaKH })
+                                    </p>
+                                </dl>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+

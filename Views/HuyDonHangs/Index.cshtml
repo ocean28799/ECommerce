@@ -1,0 +1,171 @@
+﻿@model IEnumerable<ECommerce.Models.HuyDonHang>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@helper BuildSubTree(List<ECommerce.Models.ChiTietDonHangHuy> chiTietGioHangs)
+{
+    if (chiTietGioHangs != null && chiTietGioHangs.Any())
+    {
+        <div class="dropdown-menu dropdown-menu-small" aria-labelledby="dropdownMenuLink" style="min-width:25rem">
+            <a class="dropdown-item" href="#">
+                <div class="row">
+                    @foreach (var child in chiTietGioHangs)
+                    {
+
+                        <div class="notification__icon-wrapper" style="width:35%">
+                            <div class="notification__icon" style="margin:10% 20%">
+                                <img src="@child.SanPham.Hinh" width="100%" />
+                            </div>
+                        </div>
+                        <div class="notification__content" style="width:65%;display:inline-block;margin-top:5%">
+                            <span class="text-success text-semibold">@child.SanPham.TenSanPham</span>
+                            <p>
+                                Quantity: @child.SoLuong
+                            </p>
+                        </div>
+
+                    }
+                </div>
+
+            </a>
+        </div>
+
+    }
+}
+<div class="main-content-container container-fluid px-4">
+    <!-- Page Header -->
+    <div class="page-header row no-gutters py-4">
+        <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+            <span class="text-uppercase page-subtitle">Overview</span>
+            <h3 class="page-title">Canceled Orders</h3>
+        </div>
+    </div>
+    <!-- End Page Header -->
+    <!-- Default Light Table -->
+    <div class="row">
+        <div class="col">
+            <div class="card card-small mb-4">
+                <div class="card-body p-0 pb-3 text-center">
+                    <table class="table mb-0">
+                        <thead class="bg-light">
+                            <tr>
+                                <th scope="col" class="border-0">OrderID</th>
+                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.NgayXacNhan)</th>
+                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.KhachHang.UserName)</th>
+                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.TongTien)</th>
+                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.TinhTrang)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.ToList())
+                            {
+                            <tr>
+                                <td>
+                                    <div class="navbar-nav flex-row " style="padding-left:50%">
+                                        <div class="nav-item dropdown notifications">
+                                            <a class="nav-link nav-link-icon text-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-top:50%">
+                                                <div class="nav-link-icon__wrapper" style="font-family:'Adobe Fan Heiti Std';color:#0192fa">
+                                                    @item.MaDonHang
+                                                </div>
+                                            </a>
+
+                                            @if (item.ChiTietDonHangHuys.Any())
+                                            {
+
+                                                @BuildSubTree(item.ChiTietDonHangHuys.ToList())
+
+                                            }
+
+
+
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NgayXacNhan)
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Details","KhachHangs",new { id = item.MaKH })">@Html.DisplayFor(modelItem => item.KhachHang.UserName)</a>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TongTien)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TinhTrang)
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Default Light Table -->
+</div>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.KhachHang.TenKH)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voucher.TenVoucher)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TongTien)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgayDatHang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaChi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SDT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HoTen)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KhachHang.TenKH)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Voucher.TenVoucher)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TongTien)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayDatHang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiaChi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SDT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoTen)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.OrderID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.OrderID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.OrderID })
+                </td>
+            </tr>
+        }
+
+    </table>*@

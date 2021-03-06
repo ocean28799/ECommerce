@@ -1,0 +1,321 @@
+﻿<!DOCTYPE html>
+
+<html class="no-js" lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Home | Ecommerce Website</title>
+    <meta name="description" content="TechPi - Cửa hàng thương mại điện tử">
+    <meta name="keywords" content="site:techpi-001-site1.gtempurl.com,site:techpi-001-site1, TechPi ECommerce, TechPi, TechPi - Cửa hàng thương mại điện tử" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicons -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/Admin/images/browser.svg">
+    <link rel="apple-touch-icon" type="image/x-icon" href="~/Admin/images/browser.svg">
+
+    <!-- Google font (font-family: 'Roboto', sans-serif; Poppins ; Satisfy) -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,600,600i,700,700i,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    @Styles.Render("~/HomeCSS")
+
+    <!-- Modernizer js -->
+    @Scripts.Render("~/HomeJS2");
+
+    <style>
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #c3c3c3;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #686868;
+        }
+
+            /* Handle on hover */
+            ::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
+    </style>
+</head>
+
+
+<body>
+    <!-- Main wrapper -->
+    <div class="wrapper" id="wrapper">
+        <!-- Header -->
+        <header id="wn__header" class="header__area header__absolute sticky__header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-6 col-lg-2">
+                        <div class="logo">
+                            <a href="@Url.Action("Index","Home")">
+                                <img width="35%" src="https://image.flaticon.com/icons/png/128/3666/3666228.png" alt="logo images"><span style="font-family:cursive;font-size:20px;font-weight:600">echPi</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 d-none d-lg-block" style="padding-left:10%">
+                        <nav class="mainmenu__nav">
+                            <ul class="meninmenu d-flex justify-content-start">
+                                <li><a href="@Url.Action("Index","Home")">Home</a></li>
+                                <li><a href="@Url.Action("Shop","Home")">Shop</a></li>
+                                <li class="drop">
+                                    <a href="" style="width:152px">Smart Device</a>
+                                    <div class="megamenu mega03">
+                                        <ul class="item item03">
+                                            <li class="title"><a href="@Url.Action("ShopWithCategory","Home",new { maDM = 1 })" style="font-weight:600;font-size:1.1em">Phone</a></li>
+                                            <li><a href="@Url.Action("ShopWithBrand","Home",new { maTH = 1 })">iPhone (iOS)</a></li>
+                                        </ul>
+                                        <ul class="item item03">
+                                            <li class="title"><a href="@Url.Action("ShopWithCategory","Home",new { maDM = 4 })" style="font-weight:600;font-size:1.1em">Apple Watch</a></li>
+                                            <li><a href="@Url.Action("ShopWithBrand","Home",new { maTH = 8 })">Season 5</a></li>
+                                        </ul>
+                                        <ul class="item item03">
+                                            <li class="title"><a href="@Url.Action("ShopWithCategory","Home",new { maDM = 6 })" style="font-weight:600;font-size:1.1em">Television</a></li>
+                                            <li><a href="@Url.Action("ShopWithBrand","Home",new { maTH = 4 })">SamSung</a></li>
+                                            <li><a href="@Url.Action("ShopWithBrand","Home",new { maTH = 5 })">Sony</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="drop">
+                                    <a href="">Electronic</a>
+                                    <div class="megamenu dropdown">
+                                        <ul class="item item01">
+                                            <li>
+                                            <a href="@Url.Action("ShopWithCategory","Home",new { maDM = 3 })">Laptop</a>
+                                            </li>
+                                            <li class="label2">
+                                                <a href="@Url.Action("ShopWithCategory","Home",new { maDM = 2 })">Camera</a>
+                                                <ul>
+                                                    <li><a href="@Url.Action("ShopWithBrand","Home",new { maTH = 2 })">Nikon</a></li>
+                                                    <li><a href="@Url.Action("ShopWithBrand","Home",new { maTH = 3 })">Sony</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="drop">
+                                    <a href="">Cars</a>
+                                    <div class="megamenu dropdown">
+                                        <ul class="item item01">
+                                            <li><a href="@Url.Action("ShopWithBrand","Home",new { maTH = 6 })">Porsche</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-6 col-lg-2">
+                        <ul class="header__sidebar__right d-flex justify-content-end align-items-center">
+                            <li class="shop_search" style="padding-right:25px"><a class="search__active" href="#"></a></li>
+                            <li class="shopcart">
+                                <a class="cartbox_active" href="#"><span class="product_qun">@Session["qty"].ToString()</span></a>
+                                <!-- Start Shopping Cart -->
+                                @if (Session["Cart"] == null)
+                                {
+                                    <div class="block-minicart minicart__active">
+                                        <div class="minicart-content-wrapper">
+                                            <div class="micart__close">
+                                                <span>close</span>
+                                            </div>
+                                            <div class="container">
+                                                <a class="text-info text-center" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;text-decoration:none;font-size:1em" href="@Url.Action("Shop","Home")">
+                                                    Không có sản phẩm nào trong giỏ hàng.<br /> Quay lại cửa hàng để tiếp tục mua sắm.
+                                                </a>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="block-minicart minicart__active">
+                                        <div class="minicart-content-wrapper">
+                                            <div class="micart__close">
+                                                <span>close</span>
+                                            </div>
+                                            <div class="items-total d-flex justify-content-between">
+                                                <span>@Session["qty"].ToString() items</span>
+                                                <span>Cart Subtotal</span>
+                                            </div>
+                                            <div class="total_amount text-right">
+                                                <span>@ViewBag.totalMoney.ToString("#,##0").Replace(',', '.') đ</span>
+                                            </div>
+                                            <div class="mini_action checkout">
+                                                <a class="checkout__btn" href="@Url.Action("AddIntoDatabase","Home")">Go to Checkout</a>
+                                            </div>
+                                            <div class="single__items">
+                                                <div class="miniproduct">
+                                                    @foreach (var item in (dynamic)ViewData["data"])
+                                                    {
+                                                        <div class="item01 d-flex mt--20">
+                                                            <div class="thumb">
+                                                                <a href="@Url.Action("Details","SanPhams",new { id = item.MaSanPham })"><img style="padding:10%" src="@item.Hinh" alt="product images"></a>
+                                                            </div>
+                                                            <div class="content">
+                                                                <h6><a href="@Url.Action("Details","SanPhams",new { id = item.MaSanPham })">@item.TenSanPham</a></h6>
+                                                                <span class="prize">@item.DonGia.ToString("#,##0").Replace(',', '.') đ</span>
+                                                                <div class="product_prize d-flex justify-content-between">
+                                                                    <span class="qun">Qty : @item.SoLuong</span>
+                                                                    <ul class="d-flex justify-content-end">
+                                                                        <li><a href="@Url.Action("DeleteItemFromCart","Home",new { maSanPham = item.MaSanPham})"><i class="zmdi zmdi-delete"></i></a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div class="mini_action cart">
+                                                <a class="cart__btn" href="@Url.Action("Cart","Home")">View and edit cart</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                <!-- End Shopping Cart -->
+                            </li>
+                            <li class="setting__bar__icon" style="min-width:130px">
+                                @if (Session["kh"] != null)
+                                {
+                                    <a class="setting__active" href="#"></a><span><a style="font-family:'Times New Roman', Times, serif;font-size:15px;font-weight:500;color:#2d6280" href="#" class="setting__active">@Session["UserName"].ToString()</a></span>
+                                    <div class="searchbar__content setting__block">
+                                        <div class="content-inner" style="padding:5%">
+                                            <div class="switcher-currency" style="margin-bottom:6%">
+                                                <strong class="label switcher-label">
+                                                    <span>@Session["UserName"].ToString()</span>
+                                                </strong>
+                                                <div class="switcher-options">
+                                                    <div class="switcher-currency-trigger">
+                                                        <div class="setting__menu">
+                                                            <a style="padding-right:30%" href="@Url.Action("UserInformation","User",new { id=Session["UserID"].ToString()})">My Information</a><br />
+                                                            <a style="padding-right:51%" href="@Url.Action("ChoXacNhan","Home")">My Order</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                           
+                                            <div class="container" style="padding:3%;width:60%;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background-color:#ffebeb;font-weight:500;font-size:15px;margin-top:10%;margin-bottom:5%;border-radius:16px;border:1px solid #520000">
+                                                <a href="@Url.Action("LogOut","Authentication")">Log Out</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <a class="setting__active" href="#"></a><span><a href="#" class="setting__active"></a></span>
+                                    <div class="searchbar__content setting__block">
+                                        <div class="content-inner" style="padding:5%">
+                                            <div class="switcher-currency">
+                                                <strong class="label switcher-label">
+                                                    <span>My Account</span>
+                                                </strong>
+                                                <div class="switcher-options">
+                                                    <div class="switcher-currency-trigger">
+                                                        <span class="currency-trigger">Login</span>
+                                                        <ul class="switcher-dropdown">
+                                                            <li style="padding-left:15px"><a href="@Url.Action("Login","Authentication")">Sign In</a></li>
+                                                            <li style="padding-left:15px"><a href="@Url.Action("Register","Authentication")">Create an new account !</a></li>
+                                                        </ul>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="switcher-currency">
+                                                <strong class="label switcher-label">
+                                                    <span>Language</span>
+                                                </strong>
+                                                <div class="switcher-options">
+                                                    <div class="switcher-currency-trigger">
+                                                        <div class="setting__menu">
+                                                            <a style="padding-right:58%" href="@Url.Action("English","Home")">English</a><br />
+                                                            <a style="padding-right:39%" href="@Url.Action("Vietnamese","Home")">VietNamese</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- //Header -->
+        <!-- Start Search Popup -->
+        <div class="brown--color box-search-content search_active block-bg close__top">
+            <form id="search_mini_form" class="minisearch" action="@Url.Action("SearchByPrice","Home")">
+                <div class="field__search">
+                    <input type="text" id="price" name="price" placeholder="Input your budget here...">
+                    <div class="action">
+                        <button type="submit" style="margin-top:50%;font-size:2em;background:none;border:0;color:white"><i class="zmdi zmdi-search"></i></button>
+                    </div>
+                </div>
+            </form>
+            <div class="close__wrap">
+                <span>close</span>
+            </div>
+        </div>
+        <!-- End Search Popup -->
+        @RenderBody()
+        <!-- Footer Area -->
+        <footer id="wn__footer" class="footer__area bg__cat--8 brown--color">
+            <div class="footer-static-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="footer__widget footer__menu">
+                                <div class="ft__logo">
+                                    <a href="@Url.Action("Index","Home")">
+                                        <img width="6%" src="https://image.flaticon.com/icons/png/128/3666/3666228.png" alt="logo images"><span style="font-family:cursive;font-size:20px;font-weight:600">echPi</span>
+                                    </a>
+                                    <p>TechPi always give you the best service with the best price.</p>
+                                </div>
+                                <div class="footer__content">
+                                    <ul class="social__net social__net--2 d-flex justify-content-center">
+                                        <li><a href="https://www.facebook.com/profile.php?id=100007159365611"><i class="bi bi-facebook"></i></a></li>
+                                        <li><a href="#"><i class="bi bi-google"></i></a></li>
+                                        <li><a href="#"><i class="bi bi-twitter"></i></a></li>
+                                        <li><a href="#"><i class="bi bi-linkedin"></i></a></li>
+                                        <li><a href="#"><i class="bi bi-youtube"></i></a></li>
+                                    </ul>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright__wrapper">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="payment text-right">
+                                <img src="~/Home/images/icons/payment.png" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- //Footer Area -->
+    </div>
+    <!-- //Main wrapper -->
+    <!-- JS Files -->
+    @Scripts.Render("~/HomeJS1");
+
+</body>
+</html>

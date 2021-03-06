@@ -1,0 +1,363 @@
+﻿@model IEnumerable<ECommerce.Models.Order>
+@{
+    ViewBag.Title = "TechPi | My Order";
+    Layout = "~/Views/Shared/_LayoutUserInfo.cshtml";
+}
+@helper BuildSubTree(List<ECommerce.Models.ChiTietGioHang> chiTietGioHangs)
+{
+    if (chiTietGioHangs != null && chiTietGioHangs.Any())
+    {
+        <div class="dropdown-menu dropdown-menu-small" aria-labelledby="dropdownMenuLink" style="min-width:25rem">
+            <a class="dropdown-item" href="#">
+                <div class="row">
+                    @foreach (var child in chiTietGioHangs)
+                    {
+
+                        <div class="notification__icon-wrapper" style="width:35%">
+                            <div class="notification__icon" style="margin:10% 20%">
+                                <img src="@child.SanPham.Hinh" width="100%" />
+                            </div>
+                        </div>
+                        <div class="notification__content" style="width:65%;display:inline-block;margin-top:5%">
+                            <span class="text-success text-semibold">@child.SanPham.TenSanPham</span>
+                            <p style="margin-bottom:0">
+                                Quantity: @child.SoLuong
+                            </p>
+                            <p style="margin-bottom:0;color:#b45757">
+                                Unit Price: @child.SanPham.GiaBan.ToString("#,##0").Replace(',', '.') đ
+                            </p>
+                        </div>
+
+                    }
+                </div>
+
+            </a>
+        </div>
+
+    }
+}
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Main Sidebar -->
+        <aside class="main-sidebar col-12 col-md-3 col-lg-2 px-0">
+            <div class="main-navbar">
+                <nav class="navbar align-items-stretch navbar-light bg-white flex-md-nowrap border-bottom p-0" style="background:#f1f7ff">
+                    <a class="navbar-brand w-100 mr-0" href="@Url.Action("Index","Home")" style="line-height: 25px">
+                        <div class="d-table m-auto">
+                            <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 25px;" src="https://image.flaticon.com/icons/png/128/187/187879.png" alt="Administrator">
+                            <span class="d-none d-md-inline ml-1">TechPi</span>
+                        </div>
+                    </a>
+                    <a class="toggle-sidebar d-sm-inline d-md-none d-lg-none">
+                        <i class="material-icons">&#xE5C4;</i>
+                    </a>
+                </nav>
+            </div>
+
+            <div class="nav-wrapper">
+                @if (Session["tmp1"].ToString() == "1")
+                {
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="@Url.Action("UserInformation","User",new { id=Session["UserID"].ToString()})">
+                                <i class="material-icons">person</i>
+                                <span>My Information</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="@Url.Action("MyOrder","Home")">
+                                <i class="material-icons">vertical_split</i>
+                                <span>My Order</span>
+                            </a>
+                        </li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("UserInformation","User",new { id=Session["UserID"].ToString()})">
+                                <i class="material-icons">person</i>
+                                <span>My Information</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="@Url.Action("MyOrder","Home")">
+                                <i class="material-icons">vertical_split</i>
+                                <span>My Order</span>
+                            </a>
+                        </li>
+                    </ul>
+                }
+
+            </div>
+        </aside>
+        <!-- End Main Sidebar -->
+        <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+            <div class="main-navbar sticky-top bg-white">
+                <!-- Main Navbar -->
+                <nav class="navbar align-items-stretch navbar-light flex-md-nowrap p-0" style="background:#f1f7ff">
+
+                    <ul class="navbar-nav border-left flex-row " style="padding-left:78%">
+                        <li class="nav-item border-right dropdown notifications">
+                            <a class="nav-link nav-link-icon text-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="nav-link-icon__wrapper">
+                                    <i class="material-icons">&#xE7F4;</i>
+                                    <span class="badge badge-pill badge-danger">2</span>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-small" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="#">
+                                    <div class="notification__icon-wrapper">
+                                        <div class="notification__icon">
+                                            <i class="material-icons">&#xE6E1;</i>
+                                        </div>
+                                    </div>
+                                    <div class="notification__content">
+                                        <span class="notification__category">Analytics</span>
+                                        <p>
+                                            Your website’s active users count increased by
+                                            <span class="text-success text-semibold">28%</span> in the last week. Great job!
+                                        </p>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <div class="notification__icon-wrapper">
+                                        <div class="notification__icon">
+                                            <i class="material-icons">&#xE8D1;</i>
+                                        </div>
+                                    </div>
+                                    <div class="notification__content">
+                                        <span class="notification__category">Sales</span>
+                                        <p>
+                                            Last week your store’s sales count decreased by
+                                            <span class="text-danger text-semibold">5.52%</span>. It could have been worse!
+                                        </p>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item notification__all text-center" href="#"> View all Notifications </a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                <img class="user-avatar rounded-circle mr-2" src="~/Admin/images/avatars/user.png" alt="User Avatar">
+                                <span class="d-none d-md-inline-block" style="font-weight:600;font-family:'Times New Roman', Times, serif">@Session["UserName"].ToString()</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-small">
+                                <a class="dropdown-item" href="@Url.Action("UserInformation","User",new { id=Session["UserID"].ToString()})">
+                                    <i class="material-icons">&#xE7FD;</i> Profile
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item text-danger" href="@Url.Action("LogOut","Authentication")">
+                                    <i class="material-icons text-danger">&#xE879;</i> Logout
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                    <nav class="nav">
+                        <a href="#" class="nav-link nav-link-icon toggle-sidebar d-md-inline d-lg-none text-center border-left" data-toggle="collapse" data-target=".header-navbar" aria-expanded="false" aria-controls="header-navbar">
+                            <i class="material-icons">&#xE5D2;</i>
+                        </a>
+                    </nav>
+                </nav>
+            </div>
+            <!-- / .main-navbar -->
+            <div class="main-content-container container-fluid px-4">
+                <!-- Page Header -->
+                <div class="page-header row no-gutters py-4">
+                    <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                        <span class="text-uppercase page-subtitle">Tổng quát</span>
+                        <h3 class="page-title">Đơn Hàng Của Tôi</h3>
+                    </div>
+                </div>
+                <div class="container">
+
+                    <div class="row" style="padding-left:5%">
+                        <div class="col-md-2" style="margin:1%">
+                            <a class="mb-2 btn btn-primary mr-2" href="@Url.Action("ChoXacNhan","Home")">Chờ Xác Nhận</a>
+                        </div>
+                        <div class="col-md-2" style="margin:1%">
+                            <a class="mb-2 btn btn-primary mr-2" href="@Url.Action("DaXacNhan","Home")">Đã Xác Nhận</a>
+                        </div>
+                        <div class="col-md-2" style="margin:1%">
+                            <a class="mb-2 btn btn-primary mr-2" href="@Url.Action("DangGiaoHang","Home")">Đang Giao Hàng</a>
+                        </div>
+                        <div class="col-md-2" style="margin:1%">
+                            <a class="mb-2 btn btn-success mr-2" href="@Url.Action("DaGiaoHang","Home")">Đã Giao Hàng</a>
+                        </div>
+                        <div class="col-md-2" style="margin:1%">
+                            <a class="mb-2 btn btn-danger mr-2" href="@Url.Action("DaHuyDon","Home")">Đã Huỷ Đơn</a>
+                        </div>
+                    </div>
+
+                </div>
+                @if (ViewBag.message != null)
+                {
+                    <div class="row">
+                        <div class="col">
+                            <div class="card card-small mb-4">
+                                <div class="card-header border-bottom">
+                                    <h6 class="m-0">Lịch Sử Mua Hàng</h6>
+                                </div>
+                                <a class="text-info text-center" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;text-decoration:none;font-size:2em;padding:5%" href="@Url.Action("Index","Home")">
+                                    @ViewBag.message
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="row">
+                        <div class="col">
+                            <div class="card card-small mb-4">
+                                <div class="card-header border-bottom">
+                                    <h6 class="m-0">Lịch Sử Mua Hàng</h6>
+                                </div>
+                                <div class="card-body p-0 pb-3 text-center">
+                                    <table class="table mb-0">
+                                        <thead class="bg-light">
+                                            <tr>
+                                                @*<th scope="col" class="border-0">Mã Đơn Hàng</th>
+                                                    <th scope="col" class="border-0">Ngày Đặt</th>
+                                                    <th scope="col" class="border-0">Tên Sản Phẩm</th>
+                                                    <th scope="col" class="border-0">Đơn Giá</th>
+                                                    <th scope="col" class="border-0">Số Lượng</th>
+                                                    <th scope="col" class="border-0">Thành Tiền</th>
+                                                    <th scope="col" class="border-0">Tình Trạng</th>
+                                                    <th scope="col" class="border-0"></th>*@
+
+                                                <th scope="col" class="border-0">OrderID</th>
+                                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.NgayDatHang)</th>
+                                                <th scope="col" class="border-0">Tên Người Nhận</th>
+                                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.Voucher.TenVoucher)</th>
+                                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.TongTien)</th>
+                                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.DiaChi)</th>
+                                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.SDT)</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+
+                                            @*@if (ViewBag.ds != null)
+                                                {
+                                                    foreach (var item in ViewBag.ds)
+                                                    {
+                                                        <tr>
+                                                            <td>TechPi#@item.MaDonHang#@item.MaKH</td>
+                                                            <td>@item.Ngay</td>
+                                                            <td><a href="@Url.Action("Details","SanPhams",new { id=item.MaSanPham})">@item.TenSanPham</a></td>
+                                                            <td>@item.DonGia.ToString("#,##0").Replace(',', '.') đ</td>
+                                                            <td>@item.SoLuong</td>
+                                                            <td>@item.ThanhTien.ToString("#,##0").Replace(',', '.') đ</td>
+                                                            <td style="color:#004bf3e3">Chờ Xác Nhận</td>
+                                                            <td><a class="mb-2 btn btn-outline-danger mr-2" href="@Url.Action("Cancel","Home",new { maGH = item.MaDonHang})" onclick="CancelNotification()"><span class="text-danger"><i class="material-icons">clear</i></span> Cancel</a></td>
+                                                        </tr>
+                                                    }
+                                                }*@
+                                            @foreach (var item in Model.ToList())
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <div class="navbar-nav flex-row " style="padding-left:50%">
+                                                            <div class="nav-item dropdown notifications">
+                                                                <a class="nav-link nav-link-icon text-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-top:50%">
+                                                                    <div class="nav-link-icon__wrapper" style="font-family:'Adobe Fan Heiti Std';color:#0192fa">
+                                                                        @item.OrderID
+                                                                    </div>
+                                                                </a>
+
+                                                                @if (item.ChiTietGioHangs.Any())
+                                                                {
+
+                                                                    @BuildSubTree(item.ChiTietGioHangs.ToList())
+
+                                                                }
+
+
+
+                                                            </div>
+
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.NgayDatHang)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.HoTen)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Voucher.TenVoucher)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.TongTien)
+                                                    </td>
+
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.DiaChi)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.SDT)
+                                                    </td>
+                                                    <td><a class="mb-2 btn btn-outline-danger mr-2" href="@Url.Action("Cancel","Home",new { maGH = item.OrderID})" onclick="CancelNotification()"><span class="text-danger"><i class="material-icons">clear</i></span> Cancel</a></td>
+                                                </tr>
+                                            }
+
+
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+
+
+
+
+            </div>
+            <footer class="main-footer d-flex p-2 px-3 bg-white border-top" style="margin-top:100%">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
+                </ul>
+                <span class="copyright ml-auto my-auto mr-2">
+                    Ecommerce © 2020
+                    <a href="https://gmail.com" rel="nofollow">ocean28799@gmail.com</a>
+                </span>
+            </footer>
+        </main>
+    </div>
+</div>
+
+
+
+
+
+<script>
+    function CancelNotification() {
+        alert("Đã huỷ đơn hàng thành công !!");
+    }
+</script>
+

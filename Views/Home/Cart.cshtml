@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+
+
+<div class="ht__bradcaump__area bg-image--1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="bradcaump__inner text-center">
+                    <nav class="bradcaump-content">
+                        <a class="breadcrumb_item" href="@Url.Action("Index","Home")" style="color:#eeaf85">Home</a>
+                        <span class="brd-separetor">/</span>
+                        <span class="breadcrumb_item active">Cart</span>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="cart-main-area section-padding--lg bg--white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 ol-lg-12">
+                <div class="table-content wnro__table table-responsive">
+                    <table>
+                        <thead>
+                            <tr class="title-top">
+                                <th class="product-thumbnail">Image</th>
+                                <th class="product-name">Product</th>
+                                <th class="product-price">Price</th>
+                                <th class="product-quantity">Quantity</th>
+                                <th class="product-subtotal">Total</th>
+                                <th class="product-remove">Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in (dynamic)ViewData["data"])
+                            {
+                                <tr>
+                                    <td class="product-thumbnail"><a href="@Url.Action("Details","SanPhams",new { id = item.MaSanPham })"><img style="padding:10%" src="@item.Hinh" alt="product img"></a></td>
+                                    <td class="product-name"><a style="text-decoration:underline" href="@Url.Action("Details","SanPhams",new { id = item.MaSanPham })">@item.TenSanPham</a></td>
+                                    <td class="product-price"><span class="amount">@item.DonGia.ToString("#,##0").Replace(',', '.') đ</span></td>
+                                    <td class="product-quantity">
+                                        <p style="color:#2e8c36">@item.SoLuongCon Products Left</p>
+                                        <form action="@Url.Action("UpdateQuantity","Home")">
+                                            <input type="hidden" name="maSanPham" value="@item.MaSanPham" />
+                                            @if (item.SoLuongCon < 20)
+                                            {
+                                                <input type="number" value="@item.SoLuong" name="newQuantity" min="1" max="@item.SoLuongCon">
+                                            }
+                                            else
+                                            {
+                                                <input type="number" value="@item.SoLuong" name="newQuantity" min="1" max="20">
+                                            }
+
+                                            <button type="submit" class="btn" style="font-size:1.4em;margin-bottom:1%;background:#cff7d8"> <i class="zmdi zmdi-refresh"></i></button>
+                                        </form>
+
+                                    </td>
+                                    <td class="product-subtotal">@item.ThanhTien.ToString("#,##0").Replace(',', '.') đ</td>
+                                    <td class="product-remove"><a href="@Url.Action("DeleteItemFromCart","Home",new { maSanPham = item.MaSanPham})">X</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="cartbox__btn">
+                    <ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">
+                        <li></li>
+                        <li></li><li></li>
+                        <li></li>
+                        <li></li>
+                        <li><a style="background:#ffbbe1b0" href="@Url.Action("DeleteCart","Home")">Clear Cart</a></li>
+                        <li><a style="background:#829bd473" href="@Url.Action("AddIntoDatabase","Home")">Check Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 offset-lg-6">
+                <div class="cartbox__total__area">
+                    <div class="cartbox-total d-flex justify-content-between">
+                        <ul class="cart__total__list">
+                            <li>Cart Total</li>
+                            <li>Shipping Fee</li>
+                        </ul>
+                        <ul class="cart__total__tk">
+                            <li style="color:#de4343">@ViewBag.totalMoney.ToString("#,##0").Replace(',', '.') đ</li>
+                            <li>23.000 đ</li>
+                        </ul>
+                    </div>
+                    <div class="cart__total__amount">
+                        <span>Grand Total</span>
+                        <span>@ViewBag.moneyTotal.ToString("#,##0").Replace(',', '.') đ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- JS Files -->
+@Scripts.Render("~/HomeJS1")
+
+
+

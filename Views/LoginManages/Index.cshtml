@@ -1,0 +1,95 @@
+﻿@model IEnumerable<ECommerce.Models.LoginManage>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="main-content-container container-fluid px-4">
+    <!-- Page Header -->
+    <div class="page-header row no-gutters py-4">
+        <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+            <span class="text-uppercase page-subtitle">Overview</span>
+            <h3 class="page-title">Login History</h3>
+        </div>
+    </div>
+    <!-- End Page Header -->
+    <!-- Default Light Table -->
+    <div class="row">
+        <div class="col">
+            <div class="card card-small mb-4">
+
+                <div class="card-body p-0 pb-3 text-center">
+                    <table class="table mb-0">
+                        <thead class="bg-light">
+                            <tr>
+                                <th scope="col" class="border-0">ID</th>
+                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.UserName)</th>
+                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.TimeLogin)</th>
+                                <th scope="col" class="border-0">@Html.DisplayNameFor(model => model.TimeLogout)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LoginManageKey)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UserName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TimeLogin)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TimeLogout)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Default Light Table -->
+</div>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TimeLogin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TimeLogout)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeLogin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeLogout)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.LoginManageKey }) |
+                @Html.ActionLink("Details", "Details", new { id=item.LoginManageKey }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.LoginManageKey })
+            </td>
+        </tr>
+    }
+
+    </table>*@

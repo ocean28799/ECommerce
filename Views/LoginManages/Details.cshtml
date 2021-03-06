@@ -1,0 +1,43 @@
+﻿@model ECommerce.Models.LoginManage
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LoginManage</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimeLogin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeLogin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimeLogout)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeLogout)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.LoginManageKey }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

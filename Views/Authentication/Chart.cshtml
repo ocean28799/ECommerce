@@ -1,0 +1,353 @@
+﻿
+@{
+    ViewBag.Title = "Administrator | TechPi";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<!doctype html>
+
+<div class="main-content-container container-fluid px-4">
+    <!-- Page Header -->
+    <div class="page-header row no-gutters py-4">
+        <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+            <span class="text-uppercase page-subtitle">Dashboard</span>
+            <h3 class="page-title">Statistic Overview</h3>
+        </div>
+    </div>
+    <!-- End Page Header -->
+
+    <div class="row">
+        <!-- Users Stats -->
+       
+        <div class="container">
+            <div class="card card-small">
+                <div class="card-header border-bottom">
+                    <h6 class="m-0">Horizontal Bar Chart</h6>
+                </div>
+                <div class="card-body pt-0">
+                    <form action="@Url.Action("ChartAdjust","Authentication")">
+                        <div class="row border-bottom py-2 bg-light">
+                            <div class="col-12 col-sm-6">
+                                <div id="blog-overview-date-range" class="input-daterange input-group input-group-sm my-auto ml-auto mr-auto ml-sm-auto mr-sm-0" style="max-width: 350px;">
+                                    <input type="text" class="input-sm form-control" name="startDay" placeholder="Start Date" id="blog-overview-date-range-1">
+                                    <input type="text" class="input-sm form-control" name="endDay" placeholder="End Date" id="blog-overview-date-range-2">
+                                    <span class="input-group-append">
+                                        <span class="input-group-text">
+                                            <i class="material-icons"></i>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6 d-flex mb-2 mb-sm-0" style="padding-right:39%;box-sizing:border-box">
+                                <button type="submit" class="btn btn-sm btn-white ml-auto mr-auto ml-sm-auto mr-sm-0 mt-3 mt-sm-0">View Full Report &rarr;</button>
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <figure class="highcharts-figure" style="max-width:100% !important">
+                        <div id="container5"></div>
+                    </figure>
+                </div>
+
+            </div>
+        </div>
+        </div>
+
+
+
+
+
+
+
+
+    </div>
+
+<script>
+    $(document).ready(function () {
+        $.getJSON("/Authentication/GetData", function (data) {
+            var Names = []
+            var Qts = []
+            for (var i = 0; i < data.length; i++) {
+                Names.push(data[i].name);
+                Qts.push(data[i].count);
+            }
+
+            Highcharts.chart('container', {
+                chart: {
+                    type: 'area'
+                },
+                title: {
+                    text: 'Sales Statistic'
+                },
+                subtitle: {
+                    text: 'TechPi'
+                },
+                xAxis: {
+                    categories: Names,
+                    tickmarkPlacement: 'on',
+                    title: {
+                        enabled: false
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: 'Quantity'
+                    },
+                    labels: {
+                        formatter: function () {
+                            return this.value;
+                        }
+                    }
+                },
+                tooltip: {
+                    split: true,
+                    valueSuffix: ' San Pham'
+                },
+                plotOptions: {
+                    area: {
+                        stacking: 'normal',
+                        lineColor: '#666666',
+                        lineWidth: 1,
+                        marker: {
+                            lineWidth: 1,
+                            lineColor: '#666666'
+                        }
+                    }
+                },
+                series: [{
+                    name: 'TechPi',
+                    data: Qts
+                }]
+            });
+            Highcharts.chart('container2', {
+                chart: {
+                    zoomType: 'xy'
+                },
+                title: {
+                    text: 'Sales Statistic'
+                },
+                subtitle: {
+                    text: 'TechPi'
+                },
+                xAxis: [{
+                    categories: Names,
+                    crosshair: true
+                }],
+                yAxis: [{ // Primary yAxis
+                    labels: {
+                        format: '{value}',
+                        style: {
+                            color: Highcharts.getOptions().colors[1]
+                        }
+                    },
+                    title: {
+                        text: 'Quantity',
+                        style: {
+                            color: Highcharts.getOptions().colors[1]
+                        }
+                    }
+                }, { // Secondary yAxis
+                    title: {
+                        text: 'Quantity',
+                        style: {
+                            color: Highcharts.getOptions().colors[0]
+                        }
+                    },
+                    labels: {
+                        format: '{value}',
+                        style: {
+                            color: Highcharts.getOptions().colors[0]
+                        }
+                    },
+                    opposite: true
+                }],
+                tooltip: {
+                    shared: true
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'left',
+                    x: 120,
+                    verticalAlign: 'top',
+                    y: 100,
+                    floating: true,
+                    backgroundColor:
+                        Highcharts.defaultOptions.legend.backgroundColor || // theme
+                        'rgba(255,255,255,0.25)'
+                },
+                series: [{
+                    name: 'Quantity',
+                    type: 'column',
+                    yAxis: 1,
+                    data: Qts,
+
+
+                }, {
+                    name: 'Quantity',
+                    type: 'spline',
+                    data: Qts,
+
+                }]
+            });
+            Highcharts.chart('container3', {
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: 'Sales Statistic'
+                },
+                subtitle: {
+                    text: 'TechPi'
+                },
+                xAxis: {
+                    categories: Names
+                },
+                yAxis: {
+                    title: {
+                        text: 'Quantity'
+                    }
+                },
+                plotOptions: {
+                    line: {
+                        dataLabels: {
+                            enabled: true
+                        },
+                        enableMouseTracking: false
+                    }
+                },
+                series: [{
+                    name: 'Trend',
+                    data: Qts
+                }]
+            });
+            Highcharts.chart('container4', {
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Sales Statistic'
+                },
+                subtitle: {
+                    text: 'TechPi'
+                },
+                xAxis: {
+                    categories: Names,
+                    title: {
+                        text: null
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Quantity',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                tooltip: {
+                    valueSuffix: ' San Pham'
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: -40,
+                    y: 80,
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor:
+                        Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+                    shadow: true
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'TechPi',
+                    data: Qts
+                }]
+            });
+        });
+    });
+
+    $(document).ready(function () {
+        $.getJSON("/Authentication/GetData", function (data) {
+            var Names = []
+            var Qts = []
+            for (var i = 0; i < data.length; i++) {
+                Names.push(data[i].name);
+                Qts.push(data[i].count);
+            }
+
+            Highcharts.chart('container5', {
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Product Access'
+                },
+                subtitle: {
+                    text: 'TechPi'
+                },
+                xAxis: {
+                    categories: Names,
+                    title: {
+                        text: null
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Quantity',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                tooltip: {
+                    valueSuffix: ' San Pham'
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: -40,
+                    y: 80,
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor:
+                        Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+                    shadow: true
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'TechPi',
+                    data: Qts
+                }]
+            });
+
+        });
+    });
+</script>
